@@ -69,7 +69,7 @@ function funcaoDoTempo() {
 
 function stopCodInterval() {
     if (intervalo === 61) {
-        clearInterval(codInterval)
+        clearInterval(codInterval);
     }
 }
 
@@ -90,10 +90,10 @@ if (isNaN(escolhaUsuarioNumero)) {
         escolhaUmNumero = parseInt(prompt('Que número você deseja inserir?'));
         if (isNaN(escolhaUmNumero)) {
             alert('Você deve digitar apenas números aqui.');
+        } else {
+            soma += escolhaUmNumero;
+            escolhaUsuarioNumero = parseInt(prompt('Escolha: 1. Inserir numero; 2. Finalizar'));
         }
-        soma += escolhaUmNumero;
-        escolhaUsuarioNumero = parseInt(prompt('Escolha: 1. Inserir numero; 2. Finalizar'));
-    } while (escolhaUsuarioNumero === 1)
+    } while (escolhaUsuarioNumero === 1);
 }
-alert(soma)
-
+alert(soma);
