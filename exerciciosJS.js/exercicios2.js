@@ -25,10 +25,11 @@ console.log(resultado);
        1 - Continuar perguntando / 2 - Parar de perguntar
       se ele digitar algo diferente de 1 ou de 2 deve mostrar um alerta para ele informando o erro e deve solicitar novamente que escolha uma opção. */
 
-let opcaoUsuario = prompt('Selecione uma das opções: 1 - Continuar perguntando / 2 - Parar de perguntar') 
-console.log(opcaoUsuario)
+let opcaoUsuario = prompt('Selecione uma das opções: 1 - Continuar perguntando / 2 - Parar de perguntar');
 
-while(opcaoUsuario > 2) {
-    alert('Voce digitou um numero invalido');
+while(opcaoUsuario === '1' || opcaoUsuario > 2) {
+    if(opcaoUsuario > 2) {
+        alert('Voce digitou um numero invalido');
+    }
     opcaoUsuario = prompt('Selecione uma das opções: 1 - Continuar perguntando / 2 - Parar de perguntar');
 }
