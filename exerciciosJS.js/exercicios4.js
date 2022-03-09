@@ -4,12 +4,12 @@
 let listaValoresAleatorios = [1, 'Olá', undefined, 99999, 'Texto qualquer'];
 
 function imprimirCadaValor(){
-    for(i of listaValoresAleatorios){
-    console.log(i)
+    for(valorLista of listaValoresAleatorios){
+    console.log(valorLista)
     }
 }
 
-imprimirCadaValor()
+imprimirCadaValor(valorLista)
 
 // 2) Crie uma função que receba uma string e retorne esta string sem nenhum espaço em branco no início e no fim 
 //    e todos caracteres em maiúsculo;
@@ -33,7 +33,8 @@ function imprimirComEspacos(message) {
             mensagemCompleta.push(mensagemRecebida[i])
         }
     }
-   return mensagemCompleta.join(' ').toLowerCase().toString();
+    let mensagemCertinha = mensagemCompleta.join(' ');
+    return `${mensagemCertinha.charAt(0)}${mensagemCertinha.slice(1).toLowerCase()}`
 }
 
 console.log(imprimirComEspacos('Oi,    essa    é      uma   string    qualquer'))
@@ -43,10 +44,12 @@ console.log(imprimirComEspacos('Oi,    essa    é      uma   string    qualquer'
 //    Esta função de Callback exibe somente a msg no console 'Algum número digitado foi inválido';
 
 function somaNumeros(numero1, numero2) {
-    if(isNaN(numero1) || isNaN(numero2)){
+    let num1 = parseInt(numero1);
+    let num2 = parseInt(numero2)
+    if(isNaN(num1) || isNaN(num2)){
         return numeroInvalido();
     } else {
-        return numero1 + numero2;
+        return num1 + num2;
     }
 }
 
