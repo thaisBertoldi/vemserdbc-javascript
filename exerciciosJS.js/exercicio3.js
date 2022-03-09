@@ -9,16 +9,18 @@ let aumentoSalario = 1.5;
 for (let i = 2016; i <= 2022; i++) {
     if (i < 2018) {
         salarioInicial += (salarioInicial * aumentoSalario) / 100;
+        console.log(salarioInicial.toFixed(2))
     } else {
-        salarioInicial += (salarioInicial * (aumentoSalario * 2)) / 100;
+        salarioInicial += (salarioInicial * (aumentoSalario *= 2)) / 100;
+        console.log(salarioInicial.toFixed(2))
     }
 }
-console.log(salarioInicial.toFixed(2))
+
 
 /* 2) Faça um programa que calcule a soma dos primeiros 50 números pares; */
 
 let somaPares = 0;
-for (let i = 1; i <= 50; i++) {
+for (let i = 1; i <= 100; i++) {
     if (i % 2 === 0) {
         somaPares += i;
     }
@@ -27,7 +29,7 @@ console.log(somaPares);
 
 /* 3) Faça um programa onde o usuário possa escolher qual a tabuada que se deseja ver. Exiba (console) a tabuada desse número de 1 a 10; */
 
-let escolhaUsuarioTabuada = prompt('Escolha o numero da tabuada de 1 a 10:');
+let escolhaUsuarioTabuada = parseInt(prompt('Escolha o numero da tabuada de 1 a 10:'));
 if(isNaN(escolhaUsuarioTabuada)){
     alert('Voce deve escolher apenas números')
 } else {
@@ -62,11 +64,7 @@ let codInterval = setInterval(funcaoDoTempo, 1000);
 let intervalo = 0;
 
 function funcaoDoTempo() {
-    if (intervalo < 10) {
-        console.log('0' + intervalo);
-    } else {
-        console.log(intervalo)
-    }
+    console.log(intervalo < 10 ? `0${intervalo}` : `${intervalo}`);
     intervalo++;
     if (intervalo === 61) {
         clearInterval(codInterval);
@@ -83,17 +81,17 @@ let escolhaUsuarioNumero = parseInt(prompt('Escolha: 1. Inserir numero; 2. Final
 let escolhaUmNumero = 0;
 let soma = 0;
 
-if (isNaN(escolhaUsuarioNumero)) {
+if (isNaN(escolhaUsuarioNumero) || escolhaUsuarioNumero > 2) {
     alert('Você deve digitar apenas números aqui.');
-} else if (escolhaUsuarioNumero === 1) {
-    do {
-        escolhaUmNumero = parseInt(prompt('Que número você deseja inserir?'));
+} else {
+    while (escolhaUsuarioNumero === 1) {
+         escolhaUmNumero = parseInt(prompt('Que número você deseja inserir?'));
         if (isNaN(escolhaUmNumero)) {
             alert('Você deve digitar apenas números aqui.');
         } else {
             soma += escolhaUmNumero;
             escolhaUsuarioNumero = parseInt(prompt('Escolha: 1. Inserir numero; 2. Finalizar'));
         }
-    } while (escolhaUsuarioNumero === 1);
+    } 
+    alert(soma);
 }
-alert(soma);
