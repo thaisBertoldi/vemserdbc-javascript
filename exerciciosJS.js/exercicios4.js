@@ -26,11 +26,17 @@ console.log(imprimirSemEspacos('      Oi, essa é uma   string   qualquer   '))
 // 	// ex: minhaFuncao('Oi,    essa    é    uma   string    qualquer') => deve retornar a string: 'Oi, essa é uma string qualquer'
 
 function imprimirComEspacos(message) {
-    let mensagemCompleta = imprimirSemEspacos(message).replaceAll('  ', ' ').toLowerCase();
-    return mensagemCompleta.charAt(0).toUpperCase() + mensagemCompleta.slice(1);
+    let mensagemRecebida = imprimirSemEspacos(message).split(' ');
+    let mensagemCompleta = [];
+    for(let i=0; i<mensagemRecebida.length; i++){
+        if(mensagemRecebida[i] !== '') {
+            mensagemCompleta.push(mensagemRecebida[i])
+        }
+    }
+   return mensagemCompleta.join(' ').toLowerCase().toString();
 }
 
-console.log(imprimirComEspacos('Oi,    essa    é    uma   string    qualquer'))
+console.log(imprimirComEspacos('Oi,    essa    é      uma   string    qualquer'))
 
 // 3) Crie uma função de soma que recebe como parâmetro 2 números (imprime no console a soma deles) e uma callback function que seja 
 //    chamada caso algum dos números informados seja inválido.
