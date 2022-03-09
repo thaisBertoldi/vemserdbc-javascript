@@ -28,10 +28,14 @@ console.log(somaPares);
 /* 3) Faça um programa onde o usuário possa escolher qual a tabuada que se deseja ver. Exiba (console) a tabuada desse número de 1 a 10; */
 
 let escolhaUsuarioTabuada = prompt('Escolha o numero da tabuada de 1 a 10:');
-let resultadoTabuada = 0;
-for (let i = 0; i <= 10; i++) {
-    resultadoTabuada = escolhaUsuarioTabuada * i;
-    console.log(`${i} * ${escolhaUsuarioTabuada} = ${resultadoTabuada}`);
+if(isNaN(escolhaUsuarioTabuada)){
+    alert('Voce deve escolher apenas números')
+} else {
+    let resultadoTabuada = 0;
+    for (let i = 0; i <= 10; i++) {
+        resultadoTabuada = escolhaUsuarioTabuada * i;
+        console.log(`${i} * ${escolhaUsuarioTabuada} = ${resultadoTabuada}`);
+    }
 }
 
 /* 4) Faça um algoritmo que apresente o quadrado de cada um dos números pares entre 1 e 100; */
