@@ -64,10 +64,6 @@ function funcaoDoTempo() {
         console.log(intervalo)
     }
     intervalo++;
-    stopCodInterval();
-}
-
-function stopCodInterval() {
     if (intervalo === 61) {
         clearInterval(codInterval);
     }
