@@ -3,19 +3,17 @@
 //    // ex. funcaoRemoveCaracterDoArray('a', [ 'c', 'a', 'texto', 'a' ] )
 //    => deve retornar o array: [ 'c', 'texto' ] (pois removeu todos 'a');
 
-
 function removerCaractere (caractere, arrayPrincipal){
+    let novoArray = []
     for(let i=0; i<arrayPrincipal.length; i++){
-        let variavelCaractere = arrayPrincipal.indexOf(caractere)
-        if(variavelCaractere !== -1){
-            arrayPrincipal.splice(variavelCaractere, 1);
+        if(arrayPrincipal[i] !== caractere){
+            novoArray.push(arrayPrincipal[i]);
         }
     }
-    return arrayPrincipal;
+    return novoArray;
 }
 
-console.log(removerCaractere('a', [ 'c', 'a', 'texto', 'a' ])) 
-
+console.log(removerCaractere('a', [ 'c', 'a', 'texto', 'a' ]))
 
 // 2) Crie uma função que receba como parâmetro um array de números e retorne
 //  	um array ordenado (NÃO pode usar a função array.sort());
@@ -107,11 +105,9 @@ console.log(funcaoNumeroAleatorio())
 let listaVaziaRandom = [];
 
 function mathRandomMelhorada (){
-    let testeAleatorio = Math.round(Math.random() * 100);
-    if(testeAleatorio%2 !== 0 && testeAleatorio > 14 && testeAleatorio < 50){
+    let testeAleatorio = funcaoNumeroAleatorio();
+    if(testeAleatorio%2 !== 0 && testeAleatorio > 14 && testeAleatorio < 50 || testeAleatorio%12 === 0){
         listaVaziaRandom.push(testeAleatorio); 
-    } else if(testeAleatorio%12 === 0){
-        listaVaziaRandom.push(testeAleatorio);
     }
 }
 
