@@ -3,17 +3,19 @@
 //    // ex. funcaoRemoveCaracterDoArray('a', [ 'c', 'a', 'texto', 'a' ] )
 //    => deve retornar o array: [ 'c', 'texto' ] (pois removeu todos 'a');
 
+
 function removerCaractere (caractere, arrayPrincipal){
-    let novoArray = []
     for(let i=0; i<arrayPrincipal.length; i++){
-        if(arrayPrincipal[i].indexOf(caractere) === -1){
-            novoArray.push(arrayPrincipal[i]);
+        let variavelCaractere = arrayPrincipal.indexOf(caractere)
+        if(variavelCaractere !== -1){
+            arrayPrincipal.splice(variavelCaractere, 1);
         }
     }
-    return novoArray;
+    return arrayPrincipal;
 }
 
-console.log(removerCaractere('a', [ 'c', 'a', 'texto', 'a' ]))
+console.log(removerCaractere('a', [ 'c', 'a', 'texto', 'a' ])) 
+
 
 // 2) Crie uma função que receba como parâmetro um array de números e retorne
 //  	um array ordenado (NÃO pode usar a função array.sort());
