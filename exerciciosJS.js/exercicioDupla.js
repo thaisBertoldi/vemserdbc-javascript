@@ -22,7 +22,6 @@ console.log(invertNumbers(370914))
 //    Exemplo: minhaFuncao( [1, 3, 5] ) // neste caso, imprime somente o: 3
 
 let numeros = [1, 3, 5, 7, 9];
-let organizados = [];
 
 function maxMinNumbers(numeros) {
     for (let j = 0; j < numeros.length; j++) {
@@ -95,30 +94,54 @@ console.log(countConsonant('Oi, tenho 5 anos de idade!!! ;D'));
 //   => possiveis combinações da string "tri":  
 //   't', 'tr', 'ti', 'tri', 'tir', 'r', 'rt', 'ri', 'rit', 'rti', 'i', 'ir', 'it', 'irt', 'itr'
 
-function printCombinations(str) {
-    let arr = str.split('');
+// function printCombinations(str) {
+//     let arr = str.split('');
+//     let combinations = [];
+//     let aux = '';
+
+//     for (let i = 0; i < arr.length; i++) {
+//         aux += arr[i];
+//         combinations.push(aux)
+//         for (let j = 0; j < arr.length; j++) {
+//             if (i != j) {
+//                 aux += arr[j]
+//                 combinations.push(aux)
+//             }
+//         }
+//         aux = arr[i]
+//         for (let k = (arr.length - 1); k >= 0; k--) {
+//             if (i != k) {
+//                 aux += arr[k]
+//                 combinations.push(aux)
+//             }
+//         }
+//         aux = '';
+//     }
+//     return combinations;
+// }
+
+// console.log(printCombinations("tri"));
+
+function combinacoes(str) {
+    let arr = str.split("");
     let combinations = [];
-    let aux = '';
-
-    for (let i = 0; i < arr.length; i++) {
-        aux += arr[i];
-        combinations.push(aux)
-        for (let j = 0; j < arr.length; j++) {
-            if (i != j) {
-                aux += arr[j]
-                combinations.push(aux)
-            }
+  
+    for (let m = 0; m < arr.length; m++) {
+      for (let n = 0; n < arr.length; n++) {
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = i + 1; j < arr.length + 1; j++) {
+            combinations = combinations.concat(arr.join('').slice(i,j));
+          }
         }
-        aux = arr[i]
-        for (let k = (arr.length - 1); k >= 0; k--) {
-            if (i != k) {
-                aux += arr[k]
-                combinations.push(aux)
-            }
+  
+        if (n + 1 < arr.length) {
+          let temp = arr[n];
+          arr.splice(n, 1);
+          arr.splice(n + 1, 0, temp);
         }
-        aux = '';
+      }
     }
-    return combinations;
-}
-
-console.log(printCombinations("tri"));
+    return [...new Set(combinations)];
+  }
+  
+  console.log(combinacoes('tri'))

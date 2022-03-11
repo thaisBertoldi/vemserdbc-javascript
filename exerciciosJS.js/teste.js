@@ -1,45 +1,23 @@
-// var numeros = [1, 3, 5, 7, 9];
-// var organizados = [];
+function combinacoes(str) {
+  let arr = str.split("");
+  let combinations = [];
 
-// function maxMinNumbers() {
-//     for(var j=0;j<numeros.length;j++){
-//         for(var i=0;i<numeros.length;i++){
-//                 if(numeros[i] < numeros[i+1]){
-//                     var temp = numeros[i];
-//                     numeros[i] = numeros[i+1];
-//                     numeros[i+1] = temp;
-//                 }
-//             }
-//     }
-//     var maior = numeros[1];
-//     var menor = numeros[numeros.length - 2]
-//     var resultado = [];
-//     if(maior === menor) {
-//         resultado.push(maior)
-//     } else {
-//         resultado.push(maior)
-//         resultado.push(menor)
-//     }
-//     return resultado
-// }
-// console.log(maxMinNumbers(numeros));
+  for (let m = 0; m < arr.length; m++) {
+    for (let n = 0; n < arr.length; n++) {
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length + 1; j++) {
+          combinations = combinations.concat(arr.join('').slice(i,j));
+        }
+      }
 
-const imprimirCombinacoes = string => {
-    let possibilidades = [];
-
-// tri - tir tri rit rti itr irt
-// tri - tr ti rt ri it ir
-// tri - t r i 
-
-    for(let i = 0; i < string.length; i++) {
-      let letra = string[i];
-      let letras = string.split(letra);
-      for(let j = 0; j < letras.length; j++) {
-        let possibilidade = letra + letras[j];
-        possibilidades.push(possibilidade);
+      if (n + 1 < arr.length) {
+        let temp = arr[n];
+        arr.splice(n, 1);
+        arr.splice(n + 1, 0, temp);
       }
     }
-    return possibilidades;
   }
-  
-  console.log(imprimirCombinacoes("tri"));
+  return [...new Set(combinations)];
+}
+
+console.log(combinacoes('tri'))
