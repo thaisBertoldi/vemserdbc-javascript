@@ -35,8 +35,6 @@
   5) Verificar o total de patrimônio da loja (preço total de todos os produtos);
   
   6) Verificar se todos os produtos cadastrados possuem um preço válido;
-
-  7) Sair;
 */
 
 function Produtos(id, descricao, preco) {
@@ -52,39 +50,66 @@ const criarProduto = (variavelId, variavelDescricao, variavelPreco) => {
     return variavelProduto;
 }
 
-let temp = confirm('Deseja cadastrar algum produto?')
+// let temp = confirm('Deseja cadastrar algum produto?')
 
-while (temp) {
-    let idProduto = prompt('Digite o id do produto');
-    let descricaoProduto = prompt('Digite a descricao do produto');
-    let precoProduto = prompt('Digite o preco do produto');
-    temp = confirm('Deseja cadastrar mais um produto ou sair?')
+// while (temp) {
+//     let idProduto = prompt('Digite o id do produto');
+//     let descricaoProduto = prompt('Digite a descricao do produto');
+//     let precoProduto = prompt('Digite o preco do produto');
+//     temp = confirm('Deseja cadastrar mais um produto ou sair?')
 
-    const listaProdutos = [];
-    listaProdutos.push(criarProduto(idProduto, descricaoProduto, precoProduto));
+//     const listaProdutos = [];
+//     listaProdutos.push(criarProduto(idProduto, descricaoProduto, precoProduto));
     
-    console.log(listaProdutos);
-}
+//     console.log(listaProdutos);
+// }
 
+let listaProdutos = [];
+listaProdutos.push(criarProduto(1, 'cachorro', 100.00));
+listaProdutos.push(criarProduto(2, 'gato', 150.00));
+listaProdutos.push(criarProduto(3, 'ovelha', 200.00));
+listaProdutos.push(criarProduto(4, 'passaro', 250.00));
+listaProdutos.push(criarProduto(5, 'avestruz', 300.00));
+console.log(listaProdutos);
 
 //2) Excluir um produto pelo código;
 const apagaProduto = (id) => {
-    let newArray = listaProdutos.filter((f) => { return f !== id })
-    listaProdutos = newArray
-    return listaProdutos.slice(obj.id);
+    let newArray = listaProdutos.filter((f) => { return f.id !== id });
+    listaProdutos = newArray;
+    return listaProdutos;
 }
 
 console.log(apagaProduto(1))
 
 
+//3) Encontrar um produto pelo código;
+const encontraProduto = (id) => {
+    return listaProdutos.find( (el) => el.id === id);
+}
 
-// const encontraProduto = () => {}
+console.log(encontraProduto(2))
 
-// console.table(listaProdutos)
-// console.table(listaProdutos.descricao)
+// // 4a) Imprimir no console em tabela a lista de produtos cadastrados;
 
-// const selecionarDescricao = (obj, str) => {
-//     return obj[str]
+console.table(listaProdutos)
+
+// // 4b) Imprimir no console em tabela a lista de descrições dos produtos cadastrados;
+
+console.table(listaProdutos, ['descricao'])
+
+// // 4c) Selecionar uma descrição desejada e:
+// //     Imprimir no console em tabela somente a descrição e preço dos produtos que possuem aquela descrição escolhida; 
+
+// const selecionarDescricao = (list, str) => {
+//     return list[str];
 // }
 
-// const totalPatrimonio = listaProdutos.map()
+// console.table(selecionarDescricao(listaProdutos, 'gato'))
+
+// // // 5) Verificar o total de patrimônio da loja (preço total de todos os produtos);
+
+// const totalPrecos = () => {
+//     return listaProdutos.preco.reduce((valorAnterior, valorAtual) => valorAnterior + valorAtual)
+// }
+
+// console.log(totalPrecos())
