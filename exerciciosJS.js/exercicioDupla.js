@@ -130,7 +130,7 @@ function combinacoes(str) {
       for (let n = 0; n < arr.length; n++) {
         for (let i = 0; i < arr.length; i++) {
           for (let j = i + 1; j < arr.length + 1; j++) {
-            combinations = combinations.concat(arr.join('').slice(i,j));
+            combinations.push(arr.join('').slice(i,j));
           }
         }
   
