@@ -24,3 +24,22 @@
 // }
 // console.log(maxMinNumbers(numeros));
 
+const imprimirCombinacoes = string => {
+    let possibilidades = [];
+
+// tri - tir tri rit rti itr irt
+// tri - tr ti rt ri it ir
+// tri - t r i 
+
+    for(let i = 0; i < string.length; i++) {
+      let letra = string[i];
+      let letras = string.split(letra);
+      for(let j = 0; j < letras.length; j++) {
+        let possibilidade = letra + letras[j];
+        possibilidades.push(possibilidade);
+      }
+    }
+    return possibilidades;
+  }
+  
+  console.log(imprimirCombinacoes("tri"));
