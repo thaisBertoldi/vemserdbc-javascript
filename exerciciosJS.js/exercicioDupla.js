@@ -21,27 +21,64 @@ console.log(invertNumbers(370914))
 //    Exemplo: minhaFuncao( [1, 3, 5, 7, 9] ) // neste caso, imprime: 3 e imprime: 7
 //    Exemplo: minhaFuncao( [1, 3, 5] ) // neste caso, imprime somente o: 3
 
-let numeros = [1, 3, 5, 7, 9];
+// let numeros = [1, 3, 5, 7, 9];
 
-function maxMinNumbers(numeros) {
-    for (let j = 0; j < numeros.length; j++) {
-        for (let i = 0; i < numeros.length; i++) {
-            if (numeros[i] < numeros[i + 1]) {
-                let temp = numeros[i];
-                numeros[i] = numeros[i + 1];
-                numeros[i + 1] = temp;
-            }
+
+function maxMinNumbers(arr) {
+    let maxNumber = 0;
+    let secondMax = 0;
+    let minNumber = null;
+    let secondMin= null;
+    
+    //maior
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] > maxNumber) {
+            secondMax = maxNumber
+            maxNumber = arr[i]
+        } else if (arr[i] > secondMax) {
+          secondMax = arr[i]
+        }
+      }
+  
+    //menor
+    for(let i = 0; i < arr.length; i++){
+        if(minNumber === null){
+            minNumber = arr[i];
+            console.log(minNumber)
+        } 
+        if(arr[i+1] > minNumber){
+            secondMin = minNumber;
+            console.log(secondMin)
+            minNumber = arr[i];
+            console.log(minNumber)
+        }
+        if(arr[i] > minNumber){
+          return `${secondMax} é o segundo maior e ${secondMin} é o segundo menor.`; // ainda não tá certo
         }
     }
-    let maior = numeros[1];
-    let menor = numeros[numeros.length - 2]
-    if (maior === menor) {
-        return `${maior}`
-    } else {
-        return `${maior} ${menor}`
-    }
-}
-console.log(maxMinNumbers(numeros));
+  }
+  
+  console.log(maxMinNumbers([1, 3, 5, 7, 9]))
+
+// function maxMinNumbers(numeros) {
+//     for (let j = 0; j < numeros.length; j++) {
+//         for (let i = 0; i < numeros.length; i++) {
+//             if (numeros[i] < numeros[i + 1]) {
+//                 let temp = numeros[i];
+//                 numeros[i] = numeros[i + 1];
+//                 numeros[i + 1] = temp;
+//             }
+//         }
+//     }
+//     let maior = numeros[1];
+//     let menor = numeros[numeros.length - 2]
+//     if (maior === menor) {
+//         return `${maior}`
+//     } else {
+//         return `${maior} ${menor}`
+//     }
+// }
+// console.log(maxMinNumbers(numeros));
 
 // 3) Crie uma função que recebe uma string e coloca todas as primeiras letras em maiúsculo;
 //    Exemplo: minhaFuncao( 'hoje faremos o trabalho em dupla, que legal - sqn' )

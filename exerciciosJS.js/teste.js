@@ -1,23 +1,23 @@
-function combinacoes(str) {
-  let arr = str.split("");
-  let combinations = [];
+function countConsonant(str) {
+  let vowels = ['a', 'e', 'i', 'o', 'u'];
+  let consonant = ['b', 'c', 'd', 'f', 'g', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z']
+  let arr = str.toLowerCase().split('')
+  let totalConsonant = 0;
+  let totalVowels = 0;
 
-  for (let m = 0; m < arr.length; m++) {
-    for (let n = 0; n < arr.length; n++) {
-      for (let i = 0; i < arr.length; i++) {
-        for (let j = i + 1; j < arr.length + 1; j++) {
-          combinations.push(arr.join('').slice(i,j));
-        }
+  for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < vowels.length; j++) {
+          if (arr[i] === vowels[j]) {
+              totalVowels++;
+          }
       }
-
-      if (n + 1 < arr.length) {
-        let temp = arr[n];
-        arr.splice(n, 1);
-        arr.splice(n + 1, 0, temp);
+      for (let k = 0; k < consonant.length; k++) {
+          if (arr[i].toString().toLowerCase() !== arr[i].toString().toUpperCase()) {
+              totalConsonant++;
+          }
       }
-    }
   }
-  return [...new Set(combinations)];
+  return `A string "${str}" tem ${totalVowels} vogais e ${totalConsonant} consoantes`
 }
 
-console.log(combinacoes('tri'))
+console.log(countConsonant('Oi, tenho 5 anos de idade!!! ;D'));
