@@ -1,0 +1,31 @@
+let contadorId = 0;
+let produtoLista = new Object();
+
+const cadastrarProduto = (id, descricao, preco) => {
+    contadorId++;
+    id = contadorId;
+    descricao = prompt("Entre a descrição do produto:");
+    preco = (prompt("Digite o preco do produto:"));
+}
+cadastrarProduto(produtoLista({ id: 1, descricao: 'cachorro', preco: 100.00}))
+
+produtoLista.push(1, 'cachorro', 100.00);
+produtoLista.push(2, 'gato', 150.00);
+produtoLista.push(3, 'ovelha', 200.00);
+produtoLista.push(4, 'passaro', 250.00);
+produtoLista.push(5, 'avestruz', 300.00);
+console.table(produtoLista);
+
+const encontrarProdutoId = (id) =>{
+    // let encontrarProduto = [];
+    // if(encontrarProduto === null || !produtoLista.some( () => encontrarId.id === produtoLista.id)){
+    //     alert("Digite um número válido. Operação cancelada.")
+    // }else{
+    //  encontrarProduto = produtoLista.filter ((el) => {encontrarId === el.id})
+     console.log("passou pelo filtro");
+    
+    
+    return produtoLista.filter ((el) => {id=== el.id})
+}
+
+console.log(encontrarProdutoId(1))
