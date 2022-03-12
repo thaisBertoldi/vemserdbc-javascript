@@ -1,164 +1,188 @@
-let primeiraResposta = parseInt(prompt('Deseja fazer alguma movimentação? Selecione \n1: Sim ou digite \n2 para cancelar'))
-if (primeiraResposta === 2) {
-  alert('Foi um prazer, até a próxima!')
-} else {
-  while (primeiraResposta.toString().toLowerCase() !== primeiraResposta.toString().toUpperCase() || primeiraResposta > 2) {
-    alert('Você precisa inserir um número válido ou pressionar para cancelar');
-    primeiraResposta = parseInt(prompt('Deseja fazer alguma movimentação? Selecione \n1: Sim ou digite \n2 para cancelar'))
-  }
-}
-
 let listaProdutos = []; //lista de produtos criada aqui
 let idProduto = 0;
 
-let respostaUsuario = parseInt(prompt(`O que deseja fazer agora? 
-\n1 Cadastrar um produto;\n2 Excluir um produto;\n3 Consultar um produto;\n4 Imprimir dados;\n5 Consultar Patrimonio ou verificar precos;\n6 Sair.`))
-if (isNaN(respostaUsuario) || respostaUsuario > 6) {
-  alert('Não foi dessa vez, parsa! Até mais')
-} else {
+const criarProduto = (variavelId, variavelDescricao, variavelPreco) => {
+  let variavelProduto = new Object();
+  variavelProduto.id = variavelId;
+  variavelProduto.descricao = variavelDescricao;
+  variavelProduto.preco = variavelPreco;
+  return variavelProduto;
+}
 
-  while (respostaUsuario !== 6) { //enquanto não for 6 vai rodar
+const cancelarOperacao = (variavel) => {
+  alert('Voltando para o menu principal...')
+  return respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
+}
 
-    
+const menuPrincipal = `\n1 Cadastrar um produto;\n2 Excluir um produto;\n3 Consultar um produto;\n4 Imprimir dados;\n5 Consultar Patrimonio ou verificar precos;\n6 Sair.`
 
-    switch (respostaUsuario) {
+let respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
 
-      case 1: //criar produto
+if (respostaUsuario !== 6) {
+  while (respostaUsuario.toString().toLowerCase() !== respostaUsuario.toString().toUpperCase() || respostaUsuario > 6) {
+    alert('Não foi dessa vez, parsa! Tente novamente. Lembre-se que para sair você precisa digitar 6')
+    respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
+  }
+}
 
-        let descricaoProduto = prompt('Digite a descricao do produto (apenas letras são válidas aqui)');
-        let validacao = true;
-        let precoProduto;
+do {
 
-        do {
-          if (descricaoProduto === null) {
-            alert('Você optou por cancelar essa operação.')
-            alert('Voltando para o menu principal...')
-            respostaUsuario = parseInt(prompt(`O que deseja fazer agora? 
-            \n1 Cadastrar um produto;\n2 Excluir um produto;\n3 Consultar um produto;\n4 Imprimir dados;\n5 Consultar Patrimonio ou verificar precos;\n6 Sair.`))
-            validacao = false;
-            break;
-          } else if (!(descricaoProduto.toString().toLowerCase() !== descricaoProduto.toString().toUpperCase())) {
-            alert('Você precisa digitar apenas letras aqui. Por favor, tente novamente')
-            descricaoProduto = prompt('Digite a descricao do produto ou pressione cancelar para sair');
-          } else {
-            validacaoNumero = true;
-            precoProduto = Number(prompt('Digite o preco do produto (apenas números são válidos aqui)'));
-            do {
-              if (isNaN(precoProduto)) {
-                alert('Você optou por cancelar essa operação ou digitou um valor inválido. Lembre-se que apenas números são válidos aqui.')
-                alert('Voltando para o menu principal...')
-                respostaUsuario = parseInt(prompt(`O que deseja fazer agora? 
-                \n1 Cadastrar um produto;\n2 Excluir um produto;\n3 Consultar um produto;\n4 Imprimir dados;\n5 Consultar Patrimonio ou verificar precos;\n6 Sair.`))
-                descricaoProduto = '';
-                validacaoNumero = false;
-                break;
-              } else {
-                idProduto++;
-                validacaoNumero = false;
-                validacao = false;
-                listaProdutos.push(criarProduto(idProduto, descricaoProduto, precoProduto));
-                console.log(listaProdutos)
-                break;
-              }
-            } while (validacaoNumero);
-           }
-        } while (validacao);
-        break;
+  switch (respostaUsuario) {
 
-      case 2: // excluir produto
-        let resposta = parseInt(prompt("Qual é o id do produto que você deseja excluir?"))
-        while (isNaN(resposta) || !(listaProdutos.some(el => el.id === resposta))) {
-          alert('Você digitou um valor inválido ou esse id não está cadastrado. Por favor, tente novamente')
-          resposta = parseInt(prompt("Qual é o id do produto que você deseja excluir?"))
+    case 1: //criar produto
+      let descricaoProduto = prompt('Digite a descricao do produto (apenas letras são válidas aqui)');
+      let validacao = true;
+      let precoProduto;
+
+      do {
+        if (descricaoProduto !== null && descricaoProduto.toString().toLowerCase() !== descricaoProduto.toString().toUpperCase()) {
+          validacaoNumero = true;
+          precoProduto = prompt('Digite o preco do produto (apenas números são válidos aqui)');
+          do {
+            if (!isNaN(precoProduto) && precoProduto !== null) {
+              idProduto++;
+              validacaoNumero = false;
+              validacao = false;
+              listaProdutos.push(criarProduto(idProduto, descricaoProduto, precoProduto));
+              console.log(listaProdutos)
+              break;
+            } else if (precoProduto === null) {
+              cancelarOperacao(precoProduto)
+              descricaoProduto = '';
+              validacaoNumero = false;
+              break;
+            } else {
+              alert('Numero inválido!')
+              precoProduto = prompt('Digite o preco do produto (apenas números são válidos aqui)');
+            }
+          } while (validacaoNumero);
+        } else if (descricaoProduto !== null && !(descricaoProduto.toString().toLowerCase() !== descricaoProduto.toString().toUpperCase())) {
+          alert('Você precisa digitar apenas letras aqui. Por favor, tente novamente')
+          descricaoProduto = prompt('Digite a descricao do produto ou pressione cancelar para sair');
+        } else {
+          cancelarOperacao(descricaoProduto);
+          validacao = false;
+          break;
         }
-        const apagaProduto = (id) => {
-          let newArray = listaProdutos.filter((el) => { return el.id !== id });
-          listaProdutos = newArray;
-          return listaProdutos;
-        }
+      } while (validacao);
+      break;
 
-        apagaProduto(resposta)
-        console.log("Você apagou o produto com sucesso!")
-        console.log(listaProdutos)
-        break;
+    case 2: // excluir produto
+      let resposta = parseInt(prompt("Qual é o id do produto que você deseja excluir?"))
+      let verificacao = false;
+      do {
+        if (listaProdutos.some(el => el.id === resposta)) {
+          //funcao
+          const apagaProduto = (id) => {
+            let newArray = listaProdutos.filter((el) => { return el.id !== id });
+            listaProdutos = newArray;
+            return listaProdutos;
+          }
 
-      case 3:// consulta por id ou por descricao 
-        let consulta = parseInt(prompt('Qual é o tipo de consulta? 1 Por Id; 2 Por descrição'))
-        while (isNaN(consulta) || consulta > 2) {
-          alert('Você digitou um número inválido! Por favor, tente novamente')
-          consulta = parseInt(prompt('Qual é o tipo de consulta? 1 Por Id; 2 Por descrição'))
+          apagaProduto(resposta)
+          alert(`Você apagou o produto id ${resposta} com sucesso! Confira lista atualizada no console.`)
+          console.log(listaProdutos)
+          verificacao = true;
+          break;
+
+        } else if (!(listaProdutos.some(el => el.id === resposta))) {
+          alert('Sinto muito, nao encontramos esse valor em nosso sistema.')
+          cancelarOperacao(resposta)
+          verificacao = true;
+          break;
         }
+      } while (!verificacao)
+      break;
+
+    case 3:// consulta por id ou por descricao 
+      let consulta = parseInt(prompt('Qual é o tipo de consulta? 1 Por Id; 2 Por descrição'))
+      let verificaConsulta = false;
+      do {
         if (consulta === 1) {
           let tipoDeConsulta = parseInt(prompt('Digite o id para consulta: '))
-          while (isNaN(tipoDeConsulta) || !(listaProdutos.some(el => el.id === tipoDeConsulta))) {
-            alert('Você digitou um valor inválido ou esse id não está cadastrado. Por favor, tente novamente')
-            tipoDeConsulta = parseInt(prompt('Digite o id para consulta: '));
-          }
-
-          const encontraProduto = (id) => {
-            return listaProdutos.find((el) => el.id === id);
-          }
-
-          console.log(encontraProduto(tipoDeConsulta));
-          alert('Sua pesquisa foi um sucesso! Verifique o console.')
-        } else {
-          let descricaoDesejada = prompt('Digite a descricao desejada: ')
-          while (!(listaProdutos.some(el => el.descricao === descricaoDesejada))) {
-            alert('Não há produtos cadastrados com essa descricao. Tente novamente')
-            descricaoDesejada = prompt('Digite a descricao desejada: ')
-          }
-
-          const selecionarDescricao = (descricao) => {
-            let descricoes = listaProdutos.map(e => {
-              return e.descricao;
-            })
-
-            let precos = listaProdutos.map(e => {
-              return e.preco;
-            })
-
-            let newArrayDescricao;
-
-            for (let i = 0; i < descricoes.length; i++) {
-              if (descricoes[i] === descricao) {
-                let estaDescricao = descricoes[i]
-                let estePreco = precos[i]
-                newArrayDescricao = {
-                  descricao: estaDescricao,
-                  preco: estePreco
-                }
+          let verifica = false;
+          do {
+            if (listaProdutos.some(el => el.id === tipoDeConsulta)) {
+              //funcao
+              const encontraProduto = (id) => {
+                return listaProdutos.find((el) => el.id === id);
               }
+
+              console.log(encontraProduto(tipoDeConsulta));
+              alert('Sua pesquisa foi um sucesso! Verifique o console.');
+              verifica = true;
+              verificaConsulta = true;
+              break;
+            } else {
+              alert('Sinto muito, nao encontramos esse valor em nosso sistema.')
+              cancelarOperacao(resposta)
+              verificacao = true;
+              break;
             }
-
-            return newArrayDescricao;
-          }
-
-          console.table(selecionarDescricao(descricaoDesejada))
-          alert('Sua pesquisa foi um sucesso! Verifique o console.')
+          } while (!verifica)
+          break;
+        } else if (consulta === 2) {
+          let descricaoDesejada = prompt('Digite a descricao desejada: ')
+          let validaDescricao = false;
+          do {
+            if (listaProdutos.some(el => el.descricao === descricaoDesejada)) {
+              const selecionarDescricao = (descricao) => {
+                let descricoes = listaProdutos.map(e => {
+                  return e.descricao;
+                })
+                let precos = listaProdutos.map(e => {
+                  return e.preco;
+                })
+                let newArrayDescricao;
+                for (let i = 0; i < descricoes.length; i++) {
+                  if (descricoes[i] === descricao) {
+                    let estaDescricao = descricoes[i]
+                    let estePreco = precos[i]
+                    newArrayDescricao = {
+                      descricao: estaDescricao,
+                      preco: estePreco
+                    }
+                  }
+                }
+                return newArrayDescricao;
+              }
+              console.table(selecionarDescricao(descricaoDesejada))
+              alert('Sua pesquisa foi um sucesso! Verifique o console.')
+              validaDescricao = true;
+              verificaConsulta = true;
+              break;
+            } else {
+              alert('Sinto muito, nao encontramos esse valor em nosso sistema.')
+              cancelarOperacao(resposta)
+              validaDescricao = true;
+              verificaConsulta = true;
+              break;
+            } 
+          } while (!validaDescricao)
+          break;
+        } else {
+          alert('Você digitou um número inválido! Por favor, tente novamente')
+          cancelarOperacao(resposta)
         }
-        break;
+      } while (!verificaConsulta)
+      break;
 
       case 4: //imprime lista 
         let tipoDePesquisa = parseInt(prompt('Digite 1 imprimir toda a lista; 2 imprimir apenas descricao;'));
-        while (isNaN(tipoDePesquisa) || tipoDePesquisa > 2) {
-          alert('Você precisa digitar um valor válido! Por favor, tente novamente.')
-          tipoDePesquisa = parseInt(prompt('Digite 1 imprimir toda a lista; 2 imprimir apenas descricao;'));
-        }
+        
         if (tipoDePesquisa === 1) {
           console.table(listaProdutos)
           alert('Sua impressão foi concluída com sucesso. Verifique seu console..')
-        } else {
+          break;
+        } else if (tipoDePesquisa === 2) {
           console.table(listaProdutos, ['descricao'])
           alert('Sua impressão foi concluída com sucesso. Verifique seu console..')
+          break;
         }
         break;
 
       case 5: //patrimonio da empresa e se todos os valores são válidos 
         let tipoDeEscolha = parseInt(prompt('Deseja: 1 Consultar patrimônio total; 2 Consultar verificação de todos os preços'))
-        while (isNaN(tipoDeEscolha) || tipoDeEscolha > 2) {
-          alert('Você precisa escolher um número válido! Por favor, tente novamente')
-          tipoDeEscolha = parseInt(prompt('Deseja: 1 Consultar patrimônio total; 2 Consultar verificação de todos os preços'))
-        }
 
         if (tipoDeEscolha === 1) {
           let precos = listaProdutos.map(e => {
@@ -166,7 +190,8 @@ if (isNaN(respostaUsuario) || respostaUsuario > 6) {
           })
           console.log(`O valor total do patrimônio da empresa é R$ ${precos.reduce((valorAnterior, valorAtual) => valorAnterior + valorAtual).toFixed(2)}`);
           alert('Sua pesquisa foi concluída com sucesso! Verifique seu console.')
-        } else {
+          break;
+        } else if(tipoDeEscolha === 2) {
           let listaPrecos = listaProdutos.map(e => {
             return e.preco;
           })
@@ -179,19 +204,14 @@ if (isNaN(respostaUsuario) || respostaUsuario > 6) {
               console.log('Todos os preços são números.')
               break;
           }
+          break;
         }
         break;
-
     }
-    respostaUsuario = parseInt(prompt((`O que deseja fazer agora? \n1 Cadastrar um produto; \n2 Excluir um produto; \n3 Consultar um produto; \n4 Imprimir dados; \n5 Consultar Patrimonio ou verificar precos; \n6 Sair.`)))
-    while (isNaN(respostaUsuario) || respostaUsuario > 6) {
-      alert('Não foi dessa vez, parsa! Tente novamente')
-      respostaUsuario = parseInt(prompt((`O que deseja fazer agora? \n1 Cadastrar um produto; \n2 Excluir um produto; \n3 Consultar um produto; \n4 Imprimir dados; \n5 Consultar Patrimonio ou verificar precos; \n6 Sair.`)))
-    }
-  }
+    respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
 
-
+  } while (respostaUsuario !== 6) 
+  
   if (respostaUsuario === 6) {
     alert('Foi um prazer, até a próxima!')
   }
-}

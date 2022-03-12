@@ -10,7 +10,6 @@ const criarProduto = (variavelId, variavelDescricao, variavelPreco) => {
 }
 
 const cancelarOperacao = (variavel) => {
-    alert('Você optou por cancelar essa operação.')
     alert('Voltando para o menu principal...')
     return respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
 }

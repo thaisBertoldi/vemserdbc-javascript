@@ -10,7 +10,6 @@ const criarProduto = (variavelId, variavelDescricao, variavelPreco) => {
 }
 
 const cancelarOperacao = (variavel) => {
-  alert('Você optou por cancelar essa operação.')
   alert('Voltando para o menu principal...')
   return respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
 }
@@ -67,7 +66,152 @@ do {
         }
       } while (validacao);
       break;
-  }
 
-  respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
-} while (respostaUsuario !== 6) 
+    case 2: // excluir produto
+      let resposta = parseInt(prompt("Qual é o id do produto que você deseja excluir?"))
+      let verificacao = false;
+      do {
+        if (listaProdutos.some(el => el.id === resposta)) {
+          //funcao
+          const apagaProduto = (id) => {
+            let newArray = listaProdutos.filter((el) => { return el.id !== id });
+            listaProdutos = newArray;
+            return listaProdutos;
+          }
+
+          apagaProduto(resposta)
+          alert(`Você apagou o produto id ${resposta} com sucesso! Confira lista atualizada no console.`)
+          console.log(listaProdutos)
+          verificacao = true;
+          break;
+
+        } else if (!(listaProdutos.some(el => el.id === resposta))) {
+          alert('Sinto muito, nao encontramos esse valor em nosso sistema.')
+          cancelarOperacao(resposta)
+          verificacao = true;
+          break;
+        }
+      } while (!verificacao)
+      break;
+
+    case 3:// consulta por id ou por descricao 
+      let consulta = parseInt(prompt('Qual é o tipo de consulta? 1 Por Id; 2 Por descrição'))
+      let verificaConsulta = false;
+      do {
+        if (consulta === 1) {
+          let tipoDeConsulta = parseInt(prompt('Digite o id para consulta: '))
+          let verifica = false;
+          do {
+            if (listaProdutos.some(el => el.id === tipoDeConsulta)) {
+              //funcao
+              const encontraProduto = (id) => {
+                return listaProdutos.find((el) => el.id === id);
+              }
+
+              console.log(encontraProduto(tipoDeConsulta));
+              alert('Sua pesquisa foi um sucesso! Verifique o console.');
+              verifica = true;
+              verificaConsulta = true;
+              break;
+            } else {
+              alert('Sinto muito, nao encontramos esse valor em nosso sistema.')
+              cancelarOperacao(resposta)
+              verificacao = true;
+              break;
+            }
+          } while (!verifica)
+          break;
+        } else if (consulta === 2) {
+          let descricaoDesejada = prompt('Digite a descricao desejada: ')
+          let validaDescricao = false;
+          do {
+            if (listaProdutos.some(el => el.descricao === descricaoDesejada)) {
+              const selecionarDescricao = (descricao) => {
+                let descricoes = listaProdutos.map(e => {
+                  return e.descricao;
+                })
+                let precos = listaProdutos.map(e => {
+                  return e.preco;
+                })
+                let newArrayDescricao;
+                for (let i = 0; i < descricoes.length; i++) {
+                  if (descricoes[i] === descricao) {
+                    let estaDescricao = descricoes[i]
+                    let estePreco = precos[i]
+                    newArrayDescricao = {
+                      descricao: estaDescricao,
+                      preco: estePreco
+                    }
+                  }
+                }
+                return newArrayDescricao;
+              }
+              console.table(selecionarDescricao(descricaoDesejada))
+              alert('Sua pesquisa foi um sucesso! Verifique o console.')
+              validaDescricao = true;
+              verificaConsulta = true;
+              break;
+            } else {
+              alert('Sinto muito, nao encontramos esse valor em nosso sistema.')
+              cancelarOperacao(resposta)
+              validaDescricao = true;
+              verificaConsulta = true;
+              break;
+            } 
+          } while (!validaDescricao)
+          break;
+        } else {
+          alert('Você digitou um número inválido! Por favor, tente novamente')
+          cancelarOperacao(resposta)
+        }
+      } while (!verificaConsulta)
+      break;
+
+      case 4: //imprime lista 
+        let tipoDePesquisa = parseInt(prompt('Digite 1 imprimir toda a lista; 2 imprimir apenas descricao;'));
+        
+        if (tipoDePesquisa === 1) {
+          console.table(listaProdutos)
+          alert('Sua impressão foi concluída com sucesso. Verifique seu console..')
+          break;
+        } else if (tipoDePesquisa === 2) {
+          console.table(listaProdutos, ['descricao'])
+          alert('Sua impressão foi concluída com sucesso. Verifique seu console..')
+          break;
+        }
+        break;
+
+      case 5: //patrimonio da empresa e se todos os valores são válidos 
+        let tipoDeEscolha = parseInt(prompt('Deseja: 1 Consultar patrimônio total; 2 Consultar verificação de todos os preços'))
+
+        if (tipoDeEscolha === 1) {
+          let precos = listaProdutos.map(e => {
+            return e.preco;
+          })
+          console.log(`O valor total do patrimônio da empresa é R$ ${precos.reduce((valorAnterior, valorAtual) => valorAnterior + valorAtual).toFixed(2)}`);
+          alert('Sua pesquisa foi concluída com sucesso! Verifique seu console.')
+          break;
+        } else if(tipoDeEscolha === 2) {
+          let listaPrecos = listaProdutos.map(e => {
+            return e.preco;
+          })
+          let verificaPreco = listaPrecos.every(el => !(isNaN(el)))
+          switch (verificaPreco) {
+            case false:
+              console.log('Pelo menos um dos valores não é um número');
+              break;
+            case true:
+              console.log('Todos os preços são números.')
+              break;
+          }
+          break;
+        }
+        break;
+    }
+    respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
+
+  } while (respostaUsuario !== 6) 
+  
+  if (respostaUsuario === 6) {
+    alert('Foi um prazer, até a próxima!')
+  }
