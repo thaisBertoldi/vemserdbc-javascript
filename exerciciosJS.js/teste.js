@@ -1,18 +1,19 @@
-let primeiraResposta = parseInt(prompt('Deseja fazer alguma movimentação? Selecione 1: Sim ou digite 2 para cancelar'))
+let primeiraResposta = parseInt(prompt('Deseja fazer alguma movimentação? Selecione \n1: Sim ou digite \n2 para cancelar'))
 if (primeiraResposta === 2) {
   alert('Foi um prazer, até a próxima!')
 } else {
   while (isNaN(primeiraResposta) || primeiraResposta > 2) {
     alert('Você precisa inserir um número válido ou pressionar para cancelar');
-    primeiraResposta = parseInt(prompt('Deseja fazer alguma movimentação? Selecione 1: Sim ou digite 2 para cancelar'))
+    primeiraResposta = parseInt(prompt('Deseja fazer alguma movimentação? Selecione \n1: Sim ou digite \n2 para cancelar'))
   }
 }
 
 let listaProdutos = []; //lista de produtos criada aqui
 
-let respostaUsuario = parseInt(prompt('O que deseja fazer agora? 1 Cadastrar um produto; 2 Excluir um produto; 3 Consultar um produto; 4 Imprimir dados; 5 Consultar Patrimonio ou verificar precos; 6 Sair.'))
+let respostaUsuario = parseInt(prompt(`O que deseja fazer agora? 
+\n1 Cadastrar um produto;\n2 Excluir um produto;\n3 Consultar um produto;\n4 Imprimir dados;\n5 Consultar Patrimonio ou verificar precos;\n6 Sair.`))
 if (isNaN(respostaUsuario) || respostaUsuario > 6) {
-  alert('Não foi dessa vez, parsa! Tente novamente')
+  alert('Não foi dessa vez, parsa! Até mais')
 } else {
 
   while (respostaUsuario !== 6) { //enquanto não for 6 vai rodar?
@@ -152,22 +153,24 @@ if (isNaN(respostaUsuario) || respostaUsuario > 6) {
         console.log(`O valor total do patrimônio da empresa é R$ ${precos.reduce( (valorAnterior, valorAtual) => valorAnterior + valorAtual ).toFixed(2)}`);
         alert('Sua pesquisa foi concluída com sucesso! Verifique seu console.')
       } else {
-        let precos = listaProdutos.map(e => {
+        let listaPrecos = listaProdutos.map(e => {
           return e.preco;
         })
-        
-        // for(let i=0; i<precos.length; i++) {
-        //   switch(precos.some( el => el === precos[i])){
-        //     case 
-        //   }
-        // }
+        let temp = listaPrecos.every( el => !(Number.isInteger(el)))
+        switch(temp) {
+            case false:
+                console.log('Pelo menos um dos valores não é decimal');
+                break;
+            case true:
+                console.log('Todos os números são decimais.')
+        }
       }
     }
 
-    respostaUsuario = parseInt(prompt('O que deseja fazer agora? 1 Cadastrar um produto; 2 Excluir um produto; 3 Consultar um produto; 4 Imprimir dados; 5 Consultar Patrimonio ou verificar precos; 6 Sair.'))
+    respostaUsuario = parseInt(prompt((`O que deseja fazer agora? \n1 Cadastrar um produto; \n2 Excluir um produto; \n3 Consultar um produto; \n4 Imprimir dados; \n5 Consultar Patrimonio ou verificar precos; \n6 Sair.`)))
     while (isNaN(respostaUsuario) || respostaUsuario > 6) {
       alert('Não foi dessa vez, parsa! Tente novamente')
-      respostaUsuario = parseInt(prompt('O que deseja fazer agora? 1 Cadastrar um produto; 2 Excluir um produto; 3 Consultar um produto; 4 Imprimir dados; 5 Consultar Patrimonio ou verificar precos; 6 Sair.'))
+      respostaUsuario = parseInt(prompt((`O que deseja fazer agora? \n1 Cadastrar um produto; \n2 Excluir um produto; \n3 Consultar um produto; \n4 Imprimir dados; \n5 Consultar Patrimonio ou verificar precos; \n6 Sair.`)))
     }
   }
 
