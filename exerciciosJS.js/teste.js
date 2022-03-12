@@ -17,18 +17,15 @@ if (isNaN(respostaUsuario) || respostaUsuario > 6) {
   alert('Não foi dessa vez, parsa! Até mais')
 } else {
 
-  while (respostaUsuario !== 6) { //enquanto não for 6 vai rodar?
-
-    function Produtos(id, descricao, preco) {
-      this.id = id;
-      this.descricao = descricao;
-      this.preco = preco;
-    }
+  while (respostaUsuario !== 6) { //enquanto não for 6 vai rodar
 
     const criarProduto = (variavelId, variavelDescricao, variavelPreco) => {
-      let variavelProduto = new Produtos(variavelId, variavelDescricao, variavelPreco);
+      let variavelProduto = new Object();
+      variavelProduto.id = variavelId;
+      variavelProduto.descricao = variavelDescricao;
+      variavelProduto.preco = variavelPreco;
       return variavelProduto;
-    }
+  }
 
     switch (respostaUsuario) {
 
