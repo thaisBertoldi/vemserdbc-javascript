@@ -2,7 +2,7 @@ let primeiraResposta = parseInt(prompt('Deseja fazer alguma movimentação? Sele
 if (primeiraResposta === 2) {
   alert('Foi um prazer, até a próxima!')
 } else {
-  while (isNaN(primeiraResposta) || primeiraResposta > 2) {
+  while (primeiraResposta.toString().toLowerCase() !== primeiraResposta.toString().toUpperCase() || primeiraResposta > 2) {
     alert('Você precisa inserir um número válido ou pressionar para cancelar');
     primeiraResposta = parseInt(prompt('Deseja fazer alguma movimentação? Selecione \n1: Sim ou digite \n2 para cancelar'))
   }
@@ -19,31 +19,50 @@ if (isNaN(respostaUsuario) || respostaUsuario > 6) {
 
   while (respostaUsuario !== 6) { //enquanto não for 6 vai rodar
 
-    const criarProduto = (variavelId, variavelDescricao, variavelPreco) => {
-      let variavelProduto = new Object();
-      variavelProduto.id = variavelId;
-      variavelProduto.descricao = variavelDescricao;
-      variavelProduto.preco = variavelPreco;
-      return variavelProduto;
-  }
+    
 
     switch (respostaUsuario) {
 
-
       case 1: //criar produto
-        idProduto++;
-        let descricaoProduto = prompt('Digite a descricao do produto');
-        while (!isNaN(descricaoProduto)) {
-          alert('Você precisa digitar apenas letras aqui. Por favor, tente novamente')
-          descricaoProduto = prompt('Digite a descricao do produto');
-        }
-        let precoProduto = Number(prompt('Digite o preco do produto'));
-        while (isNaN(precoProduto)) {
-          alert('Você digitou um valor inválido. Por Favor, tente novamente')
-          precoProduto = Number(prompt('Digite o preco do produto'));
-        }
-        listaProdutos.push(criarProduto(idProduto, descricaoProduto, precoProduto));
-        console.log(listaProdutos)
+
+        let descricaoProduto = prompt('Digite a descricao do produto (apenas letras são válidas aqui)');
+        let validacao = true;
+        let precoProduto;
+
+        do {
+          if (descricaoProduto === null) {
+            alert('Você optou por cancelar essa operação.')
+            alert('Voltando para o menu principal...')
+            respostaUsuario = parseInt(prompt(`O que deseja fazer agora? 
+            \n1 Cadastrar um produto;\n2 Excluir um produto;\n3 Consultar um produto;\n4 Imprimir dados;\n5 Consultar Patrimonio ou verificar precos;\n6 Sair.`))
+            validacao = false;
+            break;
+          } else if (!(descricaoProduto.toString().toLowerCase() !== descricaoProduto.toString().toUpperCase())) {
+            alert('Você precisa digitar apenas letras aqui. Por favor, tente novamente')
+            descricaoProduto = prompt('Digite a descricao do produto ou pressione cancelar para sair');
+          } else {
+            validacaoNumero = true;
+            precoProduto = Number(prompt('Digite o preco do produto (apenas números são válidos aqui)'));
+            do {
+              if (isNaN(precoProduto)) {
+                alert('Você optou por cancelar essa operação ou digitou um valor inválido. Lembre-se que apenas números são válidos aqui.')
+                alert('Voltando para o menu principal...')
+                respostaUsuario = parseInt(prompt(`O que deseja fazer agora? 
+                \n1 Cadastrar um produto;\n2 Excluir um produto;\n3 Consultar um produto;\n4 Imprimir dados;\n5 Consultar Patrimonio ou verificar precos;\n6 Sair.`))
+                descricaoProduto = '';
+                validacaoNumero = false;
+                break;
+              } else {
+                idProduto++;
+                validacaoNumero = false;
+                validacao = false;
+                listaProdutos.push(criarProduto(idProduto, descricaoProduto, precoProduto));
+                console.log(listaProdutos)
+                break;
+              }
+            } while (validacaoNumero);
+           }
+        } while (validacao);
         break;
 
       case 2: // excluir produto
