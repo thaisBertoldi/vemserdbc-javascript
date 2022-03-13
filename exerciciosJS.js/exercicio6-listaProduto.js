@@ -20,7 +20,7 @@ let respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}
 
 if (respostaUsuario !== 6) {
   while (respostaUsuario.toString().toLowerCase() !== respostaUsuario.toString().toUpperCase() || respostaUsuario > 6) {
-    alert('Não foi dessa vez, parsa! Tente novamente. Lembre-se que para sair você precisa digitar 6')
+    alert('Não foi dessa vez, parsa! Lembre-se que para sair você precisa digitar 6')
     respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
   }
 }
@@ -115,8 +115,9 @@ do {
               break;
             } else {
               alert('Sinto muito, nao encontramos esse valor em nosso sistema.')
-              cancelarOperacao(resposta)
+              cancelarOperacao(consulta)
               verificacao = true;
+              verifica = true;
               break;
             }
           } while (!verifica)
@@ -153,65 +154,86 @@ do {
               break;
             } else {
               alert('Sinto muito, nao encontramos esse valor em nosso sistema.')
-              cancelarOperacao(resposta)
+              cancelarOperacao(descricaoDesejada)
               validaDescricao = true;
               verificaConsulta = true;
               break;
-            } 
+            }
           } while (!validaDescricao)
           break;
         } else {
           alert('Você digitou um número inválido! Por favor, tente novamente')
-          cancelarOperacao(resposta)
+          cancelarOperacao(consulta)
+          verificaConsulta = true;
+          break;
         }
       } while (!verificaConsulta)
       break;
 
-      case 4: //imprime lista 
-        let tipoDePesquisa = parseInt(prompt('Digite 1 imprimir toda a lista; 2 imprimir apenas descricao;'));
-        
+    case 4: //imprime lista 
+      let tipoDePesquisa = parseInt(prompt('Digite 1 imprimir toda a lista; 2 imprimir apenas descricao;'));
+      let verificaPesquisa = false;
+      do {
         if (tipoDePesquisa === 1) {
           console.table(listaProdutos)
           alert('Sua impressão foi concluída com sucesso. Verifique seu console..')
+          verificaPesquisa = true;
           break;
         } else if (tipoDePesquisa === 2) {
           console.table(listaProdutos, ['descricao'])
           alert('Sua impressão foi concluída com sucesso. Verifique seu console..')
+          verificaPesquisa = true;
+          break;
+        } else {
+          alert('Você digitou um número inválido! Por favor, tente novamente')
+          cancelarOperacao(tipoDePesquisa)
+          verificaPesquisa = true;
           break;
         }
-        break;
+      } while (!verificaPesquisa)
+      break;
 
-      case 5: //patrimonio da empresa e se todos os valores são válidos 
-        let tipoDeEscolha = parseInt(prompt('Deseja: 1 Consultar patrimônio total; 2 Consultar verificação de todos os preços'))
+    case 5: //patrimonio da empresa e se todos os valores são válidos 
+      let tipoDeEscolha = parseInt(prompt('Deseja: 1 Consultar patrimônio total; 2 Consultar verificação de todos os preços'))
+      let verificaAlgo = false;
 
+      do {
         if (tipoDeEscolha === 1) {
           let precos = listaProdutos.map(e => {
             return e.preco;
           })
           console.log(`O valor total do patrimônio da empresa é R$ ${precos.reduce((valorAnterior, valorAtual) => valorAnterior + valorAtual).toFixed(2)}`);
           alert('Sua pesquisa foi concluída com sucesso! Verifique seu console.')
+          verificaAlgo = true;
           break;
-        } else if(tipoDeEscolha === 2) {
+        } else if (tipoDeEscolha === 2) {
           let listaPrecos = listaProdutos.map(e => {
             return e.preco;
           })
           let verificaPreco = listaPrecos.every(el => !(isNaN(el)))
           switch (verificaPreco) {
             case false:
-              console.log('Pelo menos um dos valores não é um número');
+              alert('Pelo menos um dos valores não é um número');
               break;
             case true:
-              console.log('Todos os preços são números.')
+              alert('Todos os preços são números.')
               break;
           }
+          verificaAlgo = true;
           break;
+         } else {
+            alert('Você digitou um número inválido! Por favor, tente novamente')
+            cancelarOperacao(tipoDePesquisa)
+            verificaAlgo = true;
+            break;
         }
-        break;
-    }
-    respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
-
-  } while (respostaUsuario !== 6) 
-  
-  if (respostaUsuario === 6) {
-    alert('Foi um prazer, até a próxima!')
+      } while (!verificaAlgo)
+      break;
   }
+  respostaUsuario = parseInt(prompt(`O que deseja fazer agora?${menuPrincipal}`))
+
+} while (respostaUsuario !== 6)
+
+if (respostaUsuario === 6) {
+  alert('Foi um prazer, até a próxima!')
+}
