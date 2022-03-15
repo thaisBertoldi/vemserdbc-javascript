@@ -58,10 +58,19 @@ class Colaborador {
     constructor(id, nome) {
         this.id = id;
         this.nome = nome;
-        this.ponto;
+        this.ponto = [];
     }
-};
 
+    marcarPonto(dia, horas) {
+        this.ponto.push({ dia, horas })
+    }
+}
+// class Marcacao {
+//     constructor(dia, horas) {
+//         this.dia = dia;
+//         this.horas = horas;
+//     }
+// }
 class Validacoes {
     ifNull(valorParaValidar) {
         if (!valorParaValidar)
@@ -87,6 +96,18 @@ function criarColaborador(variavel) {
 
 function findColaborador(variavel) {
     return listaColaboradores.find(el => el.id === parseInt(variavel))
+}
+
+function findAllColaboradores() {
+    return listaColaboradores.forEach(el => console.log(el))
+}
+
+function findColaboradoresWithoutPonto() {
+    return listaColaboradores.forEach(el => {
+        if(el.ponto.length === 0){
+            console.log(el)
+        }
+    })
 }
 
 let validacao = false;
@@ -120,11 +141,21 @@ do {
                 let colaborador = findColaborador(idColaborador);
                 let diaASerMarcado = prompt('Digite o dia a ser marcado')
                 let horasASeremMarcadas = prompt('Digite as horas a serem marcadas')
-                colaborador.ponto = {dia: diaASerMarcado, horas: horasASeremMarcadas}
+                colaborador.marcarPonto(diaASerMarcado, horasASeremMarcadas)
                 validacaoMarcarPonto = true;
                 console.log(listaColaboradores)
-            } while(!validacaoMarcarPonto)
-        }
+            } while (!validacaoMarcarPonto)
+            break;
+
+        case '3':
+            findAllColaboradores()
+            break;
+
+        case '4':
+            findColaboradoresWithoutPonto();
+            break;
+    }
+
 } while (!validacao)
 
 

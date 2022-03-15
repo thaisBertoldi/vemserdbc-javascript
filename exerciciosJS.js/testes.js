@@ -5,8 +5,13 @@ class Colaborador {
     constructor(id, nome) {
         this.id = id;
         this.nome = nome;
-        this.ponto;
+        this.ponto = [];
     }
+
+    marcarPonto(dia, horas) {
+        this.ponto.push({ dia, horas })
+    }
+}
 
     // marcarPonto (id, dia, horas) {
     //     return listaColaboradores.find(el => {
@@ -15,8 +20,6 @@ class Colaborador {
     //         }
     //     })
     // }
-
-};
 
 class Validacoes {
     ifNull(valorParaValidar) {
@@ -45,6 +48,14 @@ function findColaborador(variavel) {
     return listaColaboradores.find(el => el.id === parseInt(variavel))
 }
 
+function findColaboradoresWithoutPonto() {
+    return listaColaboradores.forEach(el => {
+        if(el.ponto.length === 0){
+            console.log(el)
+        }
+    })
+}
+
 let primeiroColaborador = new Colaborador(1, 'Tiago')
 let segundoColaborador = new Colaborador(2, 'Thais')
 let terceiroColaborador = new Colaborador(3, 'Joao')
@@ -58,8 +69,10 @@ let dia = 22;
 let horas = 8;
 
 let colaborador = findColaborador(idtemp);
-colaborador.ponto = {dia, horas}
-console.log(colaborador)
+colaborador.ponto = { dia, horas }
+console.log(findColaboradoresWithoutPonto())
+
+//console.log(colaborador)
 
 
 
