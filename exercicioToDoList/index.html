@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" type="text/css" href="events.css" media="screen" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To do list</title>
+</head>
+
+<body>
+
+  <section id="container"
+    class="d-flex flex-column justify-content-center align-items-center p-3 m-5 mx-auto w-75 border border-secondary">
+    <div id="btn-container" class="col-12 d-flex justify-content-around">
+      <div id="top-page" class="top-page">
+        <!--Quero botar H1 aqui pelo JS-->
+      </div>
+      <div id="tarefas">
+        <label for=""> Descricao do To Do: </label>
+        <input type="text" id="input-tarefa" placeholder="Digite sua tarefa">
+      <button id="btn-tarefa" onclick="adicionarTarefa()" type="submit">+</button>
+      </div>
+
+      <ul id="tarefas"></ul>
+    </div>
+  </section>
+  <div id="nenhum-todo"> 
+    <p>Nenhum 'To Do' cadastrado ainda</p>
+  </div>
+  <div id="lista-todo">
+    <p>To Dos:</p>
+  </div>
+
+  <!--SEMPRE POR ÚLTIMO, PARA TER CTZ QUE VAI DAR TUDO CERTO-->
+  <script src="script.js"></script>
+</body>
+
+</html>

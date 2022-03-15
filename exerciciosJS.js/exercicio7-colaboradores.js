@@ -26,59 +26,24 @@ class Colaborador {
 class Validacoes {
 
     //verificar se é null
-    ifNull = (variavelParaValidar) => {
-        if (!variavelParaValidar) {
-            alert('Você cancelou essa operação.');
-            return true;
-        } else {
-            return false;
-        }
-    }
+    ifNull = (variavelParaValidar) => !variavelParaValidar ? alert('Você cancelou essa operação.') : false
 
     //verificar se é numero
-    ifNumber = (variavelParaValidar) => {
-        if (!isNaN(variavelParaValidar)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    ifNumber = (variavelParaValidar) =>  !isNaN(variavelParaValidar) ? true : false;
 
     // verificar se é string
-    ifString = (variavelParaValidar) => {
-        if (variavelParaValidar.toString().toLowerCase() !== variavelParaValidar.toString().toUpperCase()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    ifString = (variavelParaValidar) => variavelParaValidar.toString().toLowerCase() !== variavelParaValidar.toString().toUpperCase() ? true : false;
 
     //validar dias
-    ifDay = (variavelParaValidar) => {
-        if (variavelParaValidar >= 1 && variavelParaValidar <= 31) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    ifDay = (variavelParaValidar) => (variavelParaValidar >= 1 && variavelParaValidar <= 31) ? true : false;
 
     //validar horas
-    ifHour = (variavelParaValidar) => {
-        if (variavelParaValidar >= 0 && variavelParaValidar <= 24) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    ifHour = (variavelParaValidar) => (variavelParaValidar >= 0 && variavelParaValidar <= 24) ? true : false;
 }
 
-function criarColaborador(variavel) {
-    listaColaboradores.push(variavel);
-}
+const criarColaborador = (variavel) => listaColaboradores.push(variavel);
 
-function findColaborador(variavel) {
-    return listaColaboradores.find(el => el.id === parseInt(variavel))
-}
+const findColaborador = (variavel) => listaColaboradores.find(el => el.id === parseInt(variavel))
 
 function findAllColaboradores() {
     return listaColaboradores.forEach(el => {
@@ -94,11 +59,7 @@ function findColaboradoresWithoutPonto() {
         } 
     })
 
-    if(colaboradoresSemPonto.length > 0){
-        return colaboradoresSemPonto;
-    } else {
-        return false;
-    }
+    return colaboradoresSemPonto.length > 0 ? true : false;
 }
 
 let validacao = false;
