@@ -74,8 +74,7 @@ do {
           if (listaProdutos.some(el => el.id === parseInt(resposta))) {
             //funcao
             const apagaProduto = (id) => {
-              let newArray = listaProdutos.filter((el) => { return el.id !== id });
-              listaProdutos = newArray;
+              listaProdutos = listaProdutos.filter((el) => { return el.id !== id });
               return listaProdutos;
             }
 
