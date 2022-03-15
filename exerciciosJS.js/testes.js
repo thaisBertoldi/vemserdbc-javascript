@@ -13,13 +13,6 @@ class Colaborador {
     }
 }
 
-    // marcarPonto (id, dia, horas) {
-    //     return listaColaboradores.find(el => {
-    //         if(el.id === id){
-    //             this.ponto = { dia, horas };
-    //         }
-    //     })
-    // }
 
 class Validacoes {
     ifNull(valorParaValidar) {
@@ -33,9 +26,12 @@ class Validacoes {
         }
     }
 
-    ifString(valorParaValidar) {
-        if (parseInt(valorParaValidar) !== null) {
-            console.log('Apenas letras sáo válidas aqui. Por favor, tente novamente')
+    ifString(variavelParaValidar) {
+        if (variavelParaValidar.toString().toLowerCase() !== variavelParaValidar.toString().toUpperCase()) {
+            return true;
+        } else {
+           console.log('Apenas letras sáo válidas aqui. Por favor, tente novamente')
+            return false;
         }
     }
 }
@@ -50,29 +46,26 @@ function findColaborador(variavel) {
 
 function findColaboradoresWithoutPonto() {
     return listaColaboradores.forEach(el => {
-        if(el.ponto.length === 0){
+        if (el.ponto.length === 0) {
             console.log(el)
         }
     })
 }
 
-let primeiroColaborador = new Colaborador(1, 'Tiago')
+function findAllColaboradores() {
+    return listaColaboradores.forEach(el => {
+        return console.log(el)
+    })
+}
+
+let nomeColaborador = new Colaborador()
 let segundoColaborador = new Colaborador(2, 'Thais')
 let terceiroColaborador = new Colaborador(3, 'Joao')
 let quartoColaborador = new Colaborador(4, 'Patricia')
 
-listaColaboradores.push(primeiroColaborador, segundoColaborador, terceiroColaborador, quartoColaborador)
-//console.log(listaColaboradores)
+listaColaboradores.push(nomeColaborador, segundoColaborador, terceiroColaborador, quartoColaborador)
 
-let idtemp = 1;
-let dia = 22;
-let horas = 8;
-
-let colaborador = findColaborador(idtemp);
-colaborador.ponto = { dia, horas }
-console.log(findColaboradoresWithoutPonto())
-
-//console.log(colaborador)
+console.log(findAllColaboradores())
 
 
 

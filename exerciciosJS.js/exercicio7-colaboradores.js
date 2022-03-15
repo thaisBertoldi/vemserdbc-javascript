@@ -65,27 +65,52 @@ class Colaborador {
         this.ponto.push({ dia, horas })
     }
 }
-// class Marcacao {
-//     constructor(dia, horas) {
-//         this.dia = dia;
-//         this.horas = horas;
-//     }
-// }
 class Validacoes {
-    ifNull(valorParaValidar) {
-        if (!valorParaValidar)
-            alert('Voltando para o menu principal.')
-    }
 
-    ifNumber(valorParaValidar) {
-        if (valorParaValidar.toString().toLowerCase() !== valorParaValidar.toString().toUpperCase()) {
-            alert('Apenas numeros são válidos aqui. Por favor, tente novamente.')
+    //verificar se é null
+    ifNull = (variavelParaValidar) => {
+        if (!variavelParaValidar) {
+            alert('Você cancelou essa operação.');
+            return true;
+        } else {
+            return false;
         }
     }
 
-    ifString(valorParaValidar) {
-        if (parseInt(valorParaValidar) !== null) {
-            alert('Apenas letras sáo válidas aqui. Por favor, tente novamente')
+    //verificar se é numero
+    ifNumber = (variavelParaValidar) => {
+        if (parseInt(variavelParaValidar) !== null) {
+            return true;
+        } else {
+            alert('Apenas numeros são válidos aqui. Por favor, tente novamente.')
+            return false;
+        }
+    }
+
+    // verificar se não é string quando precisa ser string
+    ifString = (variavelParaValidar) => {
+        if (variavelParaValidar.toString().toLowerCase() !== variavelParaValidar.toString().toUpperCase()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //validar dias
+    ifDay = (variavelParaValidar) => {
+        if(variavelParaValidar >= 1 && variavelParaValidar <= 31) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //validar horas
+    ifHour = (variavelParaValidar) => {
+        if(variavelParaValidar >= 0 && variavelParaValidar <= 24) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
@@ -99,25 +124,27 @@ function findColaborador(variavel) {
 }
 
 function findAllColaboradores() {
-    return listaColaboradores.forEach(el => console.log(el))
+    return listaColaboradores.forEach(el => {
+        return console.log(el)
+    })
 }
 
 function findColaboradoresWithoutPonto() {
-    return listaColaboradores.forEach(el => {
-        if(el.ponto.length === 0){
+    return listaColaboradores.map(el => {
+        if (el.ponto.length === 0) {
             console.log(el)
         }
     })
 }
 
 let validacao = false;
+let idContador = 0;
+const condicao = new Validacoes();
 
 do {
     let perguntaAoUsuario = prompt(MENU_PRINCIPAL);
-    let idContador = 0;
-    if (perguntaAoUsuario === '9') {
+    if (condicao.ifNull(perguntaAoUsuario)) {
         validacao = true;
-        alert('Obrigado, até a próxima')
     }
 
     switch (perguntaAoUsuario) {
@@ -126,33 +153,81 @@ do {
             let validacaoCreate = false;
             do {
                 let nomeColaborador = prompt('Digite o nome do colaborador (apenas letras aqui)')
-                idContador++
-                let colaborador = new Colaborador(idContador, nomeColaborador);
-                criarColaborador(colaborador);
-                validacaoCreate = true;
-                break;
+                if (condicao.ifNull(nomeColaborador)) {
+                    validacaoCreate = true;
+                    validacao = false;
+                    break;
+                }
+                
+                if(condicao.ifString(nomeColaborador)) {
+                    idContador++;
+                    let colaborador = new Colaborador(idContador, nomeColaborador);
+                    criarColaborador(colaborador);
+                    validacaoCreate = true;
+                    validacao = false;
+                    console.log(listaColaboradores)
+                    break;
+                } else {
+                    alert('Você precisa digitar apenas letras aqui.')
+                }
             } while (!validacaoCreate)
             break;
 
         case '2':
             let validacaoMarcarPonto = false;
             do {
-                let idColaborador = prompt('Digite o id do Colaborador para qual deseja marcar o ponto')
-                let colaborador = findColaborador(idColaborador);
-                let diaASerMarcado = prompt('Digite o dia a ser marcado')
-                let horasASeremMarcadas = prompt('Digite as horas a serem marcadas')
-                colaborador.marcarPonto(diaASerMarcado, horasASeremMarcadas)
-                validacaoMarcarPonto = true;
-                console.log(listaColaboradores)
+                let idColaborador = prompt('Digite o id do Colaborador para qual deseja marcar o ponto');
+                if (condicao.ifNull(idColaborador)) {
+                    validacaoMarcarPonto = true;
+                    validacao = false;
+                    break;
+                }
+                if(condicao.ifNumber(idColaborador)){
+                    let colaborador = findColaborador(idColaborador);
+                    let diaASerMarcado = prompt('Digite o dia a ser marcado')
+                    if (condicao.ifNull(diaASerMarcado)) {
+                        validacaoMarcarPonto = true;
+                        validacao = false;
+                        break;
+                    }
+                    let horasASeremMarcadas = prompt('Digite as horas a serem marcadas')
+                    if (condicao.ifNull(horasASeremMarcadas)) {
+                        validacaoMarcarPonto = true;
+                        validacao = false;
+                        break;
+                    }
+                    colaborador.marcarPonto(diaASerMarcado, horasASeremMarcadas)
+                    validacaoMarcarPonto = true;
+                    console.log(listaColaboradores)
+                } else {
+                    alert('Você precisa digitar apenas números aqui.')
+                }
             } while (!validacaoMarcarPonto)
             break;
 
         case '3':
-            findAllColaboradores()
-            break;
+            if(listaColaboradores.length === 0) {
+                alert('Desculpe, não encontramos nenhum dado.')
+                break;
+            } else {
+                alert('Verifique seu console.')
+                console.log(listaColaboradores)
+                break;
+            }
 
         case '4':
-            findColaboradoresWithoutPonto();
+            if(findColaboradoresWithoutPonto().length === 0){
+                alert('Desculpe, não encontramos nenhum dado.')
+                break;
+            } else {
+                alert('Verifique seu console.')
+                console.log(findColaboradoresWithoutPonto())
+                break;
+            }
+
+        case '9':
+            validacao = true;
+            alert('Obrigado, até a próxima');
             break;
     }
 
