@@ -87,11 +87,18 @@ function findAllColaboradores() {
 }
 
 function findColaboradoresWithoutPonto() {
-    return listaColaboradores.map(el => {
+
+    let colaboradoresSemPonto = listaColaboradores.filter(el => {
         if (el.ponto.length === 0) {
-            console.log(el)
-        }
+            return el;
+        } 
     })
+
+    if(colaboradoresSemPonto.length > 0){
+        return colaboradoresSemPonto;
+    } else {
+        return false;
+    }
 }
 
 let validacao = false;
@@ -182,12 +189,12 @@ do {
             }
 
         case '4':
-            if (findColaboradoresWithoutPonto().length === 0) {
-                alert('Desculpe, não encontramos nenhum dado.')
-                break;
-            } else {
+            if (findColaboradoresWithoutPonto()) {
                 alert('Verifique seu console.')
                 console.log(findColaboradoresWithoutPonto())
+                break;
+            } else {
+                alert('Não há colaboradores sem ponto marcado a serem exibidos.');
                 break;
             }
 
@@ -198,5 +205,3 @@ do {
     }
 
 } while (!validacao)
-
-
