@@ -1,48 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
+:root {
+  --primary-color: rgb(34, 55, 146);
+  --primary-color-darker: rgb(7, 13, 37);
+}
+
 * {
   box-sizing: border-box;
+  outline: 0;
 }
 
-ul {
+body {
   margin: 0;
   padding: 0;
+  background: var(--primary-color);
+  font-family: 'Open sans', sans-serif;
+  font-size: 1.3em;
+  line-height: 1.5em;
 }
 
-ul li {
-  cursor: pointer;
-  position: relative;
-  padding: 12px 8px 12px 40px;
-  font-size: 18px;
-  transition: 0.2s;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.container {
+    max-width: 640px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .id-verde {
   background-color: #3CB371;
-}
-
-#tarefas {
-  display: flex;
-  flex-direction: row;
-  padding: 10px 0px;
-  column-gap: 10px;
-}
-
-#container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid gray;
-  border-radius: 4px;
-  margin: 30px;
-}
-
-#nenhum-todo, #lista-todo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
