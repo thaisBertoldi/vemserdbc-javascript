@@ -25,6 +25,7 @@ const criaLista = () => {
     lista.setAttribute('id', 'checked')
     ul.appendChild(lista)
 }
+
 let arrayListaTarefas = [];
 
 
@@ -48,15 +49,13 @@ const esconderDiv = () => {
     }
 }
 
-//let checked = document.getElementById('checked')
-
-const algumacoisa = document.addEventListener('click', function (e) {
+const mudarCorLista = document.addEventListener('click', function (e) {
     console.log(e.target)
     if (e.target === lista) {
-        lista.classList.add('id-verde')
+        lista.classList.toggle('id-verde')
     }
 })
 
-const nenhumToDo = () => {
+const excluirTarefa = () => {
 
 }
