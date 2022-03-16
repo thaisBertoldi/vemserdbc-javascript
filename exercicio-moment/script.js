@@ -1,3 +1,13 @@
+
+const mensagemErro = (variavel, id) => {
+    let mensagemErro = document.getElementById(id);
+    if (!variavel) {
+        return mensagemErro.classList.remove('d-none')
+    } else {
+        mensagemErro.classList.add('d-none');
+    }
+}
+
 const validarEmail = (event) => {
     /* 
         adicionar um eventListener para o evento "onkeyup" do input email-input que terá como ação esta função de validarEmail
@@ -37,7 +47,8 @@ const validarEmail = (event) => {
     let dominioEmail = email.slice(arroba + 1, ponto)
     let dominioDBC = dominioEmail === 'dbccompany'
 
-    const ehValido = validacaoCaractere && existeArroba && pontoDepoisArroba && ultimoCaractere && dominioDBC
+    const ehValido = validacaoCaractere && existeArroba && pontoDepoisArroba && ultimoCaractere && dominioDBC;
+    mensagemErro(ehValido, 'email-erro')
     return ehValido;
 }
 
@@ -71,12 +82,16 @@ const validarSenha = (event) => {
     let peloMenosOito = senha.length >= 8;
 
     const ehValido = possuiLetraMinuscula && possuiLetraMaiuscula && possuiEspecial && possuiNumero && peloMenosOito;
+    mensagemErro(ehValido, 'senha-erro')
     return ehValido;
 }
 
 
+
 const adicionarMascaraData = (input, data) => {
-    // aqui vamos adicionar uma máscara ao input
+    const inputData = document.getElementById('data-input').value;
+    //inputData.replaceAll('/', '');
+
 }
 
 
@@ -107,10 +122,9 @@ const validarData = () => {
     let seDezoitoAVinteESeis = data.isBetween(vinteSeisAnosAtras, dezoitoAnosAtras)
 
     const ehValido = validacaoData && seNaoDataFutura && seDezoitoAVinteESeis;
+    mensagemErro(ehValido, 'data-erro')
     return ehValido;
 }
-
-
 
 const validarCadastro = (event) => {
     event.preventDefault();
