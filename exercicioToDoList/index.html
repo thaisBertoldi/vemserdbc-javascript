@@ -4,37 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="stylesheet" type="text/css" href="events.css" media="screen" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To do list</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>My To Do List</title>
 </head>
 
 <body>
-
-  <section id="container"
+  <div
     class="container d-flex flex-column justify-content-center align-items-center p-3 m-5 mx-auto w-75 border border-secondary">
     <div id="btn-container" class="col-12 d-flex justify-content-around">
       <div id="top-page" class="top-page">
-        <!--Quero botar H1 aqui pelo JS-->
+
       </div>
-      <div id="tarefas">
-        <label for=""> Descricao do To Do: </label>
-        <input type="text" id="input-tarefa" placeholder="Digite sua tarefa">
-      <button id="btn-tarefa" onclick="adicionarTarefa()" type="submit">+</button>
+    </div>
+    <div id="tarefas">
+      <label class="form-label">Digite aqui a tarefa</label>
+      <div style="display: flex; flex-direction: row; column-gap: 10px;">
+        <input type="text" class="form-control">
+        <button id="btn-tarefa" type="submit" class="btn btn-primary" style="border-radius: 80px;">+</button>
       </div>
 
-      <ul id="tarefas"></ul>
     </div>
-    
-    <div id="lista-todo">
-      <p>To Dos:</p>
-    </div>
-    <div id="nenhum-todo"> 
-      <p>Nenhum 'To Do' cadastrado ainda</p>
-    </div>
-  </section>
 
-  <!--SEMPRE POR ÚLTIMO, PARA TER CTZ QUE VAI DAR TUDO CERTO-->
+  </div>
+
   <script src="script.js"></script>
 </body>
 
