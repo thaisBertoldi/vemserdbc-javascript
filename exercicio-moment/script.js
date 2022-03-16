@@ -25,7 +25,7 @@ const validarEmail = (event) => {
 
     //3 - obrigatório possuir pelo menos um '.' (ponto) depois do '@' e não podem estar juntos, ex: email@.ig // inválido pois o ponto está junto do arroba;
     // let existePonto = caractereEmail.some(el => el === '.')
-    let pontoDepoisArroba = caractereEmail.indexOf('.') > (caractereEmail.indexOf('@') + 1 )
+    let pontoDepoisArroba = caractereEmail.indexOf('.') > (caractereEmail.indexOf('@') + 1)
 
     //4 - não pode terminar com '.' (ponto), ex: "email@pessoal.";
     //5 - deve ter pelo menos duas letras depois de um '.' (ponto), ex: "email@pessoal.c" // inválido pois tem somente o 'c' depois do '.';
@@ -90,7 +90,23 @@ const validarData = () => {
         obs: caso o email (value) que está no input for válido/inválido deverá alterar a span com id="data-erro" para fique com um display visível ou invisível (dependendo da situação)
     */
 
-    const ehValido = false;
+    const input = document.getElementById('data-input');
+    const data = moment(input.value, 'DD/MM/YYYY');
+
+    // 1 - deve ser uma data válida;
+    // let dataUsuario = moment(data, 'DD/MM/YYYY')
+    let validacaoData = data.isValid(data)
+
+    //2 - não pode ser uma data futura;
+    let dataAtual = moment()
+    let seNaoDataFutura = data.isBefore(dataAtual)
+
+    //3 - deve ser uma data entre 18 e 26 anos; (idade > 18)
+    let dezoitoAnosAtras = moment().subtract(18, 'years')
+    let vinteSeisAnosAtras = moment().subtract(26, 'years')
+    let seDezoitoAVinteESeis = data.isBetween(vinteSeisAnosAtras, dezoitoAnosAtras)
+
+    const ehValido = validacaoData && seNaoDataFutura && seDezoitoAVinteESeis;
     return ehValido;
 }
 
@@ -98,6 +114,5 @@ const validarData = () => {
 
 const validarCadastro = (event) => {
     event.preventDefault();
-    console.log(`Cadastro ${validarEmail()}`)
-    //(`Cadastro${validarData() && validarEmail() && validarSenha() ? 'válido!' : 'inválido'}`);
+    console.log(`Cadastro: data: ${validarData()}, email: ${validarEmail()}, senha: ${validarSenha()}`)
 }
