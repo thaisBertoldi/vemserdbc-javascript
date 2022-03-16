@@ -24,8 +24,8 @@ const validarEmail = (event) => {
     let existeArroba = caractereEmail.some(el => el === '@');
 
     //3 - obrigatório possuir pelo menos um '.' (ponto) depois do '@' e não podem estar juntos, ex: email@.ig // inválido pois o ponto está junto do arroba;
-    let existePonto = caractereEmail.some(el => el === '.')
-    let pontoDepoisArroba = caracteres.indexOf('.') > (caracteres.indexOf('@') + 1 )
+    // let existePonto = caractereEmail.some(el => el === '.')
+    let pontoDepoisArroba = caractereEmail.indexOf('.') > (caractereEmail.indexOf('@') + 1 )
 
     //4 - não pode terminar com '.' (ponto), ex: "email@pessoal.";
     //5 - deve ter pelo menos duas letras depois de um '.' (ponto), ex: "email@pessoal.c" // inválido pois tem somente o 'c' depois do '.';
@@ -37,7 +37,7 @@ const validarEmail = (event) => {
     let dominioEmail = email.slice(arroba + 1, ponto)
     let dominioDBC = dominioEmail === 'dbccompany'
 
-    const ehValido = false;
+    const ehValido = validacaoCaractere && existeArroba && pontoDepoisArroba && ultimoCaractere && dominioDBC
     return ehValido;
 }
 
@@ -98,5 +98,6 @@ const validarData = () => {
 
 const validarCadastro = (event) => {
     event.preventDefault();
-    console.log(`Cadastro ${validarData() && validarEmail() && validarSenha() ? 'válido!' : 'inválido'}`);
+    console.log(`Cadastro ${validarEmail()}`)
+    //(`Cadastro${validarData() && validarEmail() && validarSenha() ? 'válido!' : 'inválido'}`);
 }
