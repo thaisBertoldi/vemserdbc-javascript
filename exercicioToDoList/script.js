@@ -17,9 +17,9 @@ const ul = document.createElement('ul');
 ul.setAttribute('id', 'lista-tarefas')
 const toDos = document.getElementById('lista-todo');
 toDos.appendChild(ul)
+let lista = document.createElement('li');
 
 const criaLista = () => {
-    let lista = document.createElement('li');
     lista.setAttribute('id', 'checked')
     lista = document.createElement('li');
     lista.setAttribute('id', 'checked')
@@ -39,6 +39,13 @@ function adicionarTarefa() {
     span.appendChild(texto);
     lista.appendChild(span);
     arrayListaTarefas.push(inputValue)
+    esconderDiv()
+}
+
+const esconderDiv = () => {
+    if(arrayListaTarefas.length > 0){
+        document.getElementById("nenhum-todo").style.setProperty("display", "none");
+    }
 }
 
 //let checked = document.getElementById('checked')
