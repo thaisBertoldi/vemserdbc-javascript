@@ -1,3 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  font-size: 18px;
+  transition: 0.2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.id-verde {
+  background-color: #3CB371;
+}
+
+#tarefas {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0px;
+  column-gap: 10px;
+}
+
 #container {
   display: flex;
   flex-direction: row;

@@ -20,9 +20,12 @@ toDos.appendChild(ul)
 
 
 let arrayListaTarefas = [];
+let lista = document.createElement('li');
+lista.setAttribute('id', 'checked')
 
 function adicionarTarefa() {
-    let lista = document.createElement('li');
+    lista = document.createElement('li');
+    lista.setAttribute('id', 'checked')
     ul.appendChild(lista)
     let inputValue = document.getElementById("input-tarefa").value;
     let tarefa = document.createTextNode(inputValue);
@@ -35,6 +38,11 @@ function adicionarTarefa() {
     arrayListaTarefas.push(inputValue)
 }
 
+//let checked = document.getElementById('checked')
 
-
-
+const algumacoisa = document.addEventListener('click', function(e){
+    console.log(e.target)
+    if(e.target === lista) {
+        lista.classList.add('id-verde')
+    }
+})
