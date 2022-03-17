@@ -105,7 +105,7 @@ const adicionarMascaraData = () => {
         inputAlgo.value = `${inputData}/`
     }
     let inputDataDay = document.getElementById('data-input').value
-    if(inputData.length === 5){
+    if (inputData.length === 5) {
         inputAlgo.value = `${inputDataDay}/`
     }
 }
@@ -120,7 +120,7 @@ const validarData = (event) => {
         obs: caso o email (value) que está no input for válido/inválido deverá alterar a span com id="data-erro" para fique com um display visível ou invisível (dependendo da situação)
     */
 
-        
+
     const input = event ? event.target : document.getElementById('data-input');
     const data = moment(input.value, 'DD/MM/YYYY');
 
@@ -145,4 +145,81 @@ const validarData = (event) => {
 const validarCadastro = (event) => {
     event.preventDefault();
     console.log(`Cadastro: nome: ${validaNome()}, data: ${validarData()}, email: ${validarEmail()}, senha: ${validarSenha()}`)
+    criarListaColaboradores()
+}
+class Colaborador {
+    id;
+    nome;
+    data;
+    email;
+    constructor(nome, data, email) {
+        this.nome = nome;
+        this.data = data;
+        this.email = email;
+    }
+}
+
+let nome = document.getElementById('nome-input')
+let data = document.getElementById('data-input')
+let email = document.getElementById('email-input')
+
+const createColaborador = () => {
+    let colaborador = new Colaborador(nome, data, email)
+    return colaborador;
+}
+
+{/* <div id="lista-colaboradores" class="pb-5 flex-column d-flex align-items-center justify-content-center">
+<ul id="ul-lista"class="w-50 border border-primary rounded flex-column d-flex align-items-center justify-content-center">
+
+            <li id="colaborador-lista" class="w-100 mt-2 p-3 d-flex align-items-center justify-content-between">
+                <div class="nome-colaborador">
+                    <p>Nome:</p>
+                    <p>Fulano de tal</p>
+                </div>
+
+                <div class="nascimento-colaborador">
+                    <p>Nascimento:</p>
+                    <p>06/04/1994</p>
+                </div>
+
+                <div class="email-colaborador">
+                    <p>Email:</p>
+                    <p>fulaninho@dbccompany.gov</p>
+                </div>
+            </li>
+        </ul>
+    </div> */}
+
+const criarListaColaboradores = (event) => {
+    //criando as divs
+    let listaNome = document.getElementById('nome-colaborador');
+
+    let listaData = document.getElementById('nascimento-colaborador')
+
+    let listaEmail = document.getElementById('email-colaborador')
+
+    //criando os paragrafos
+    let nomeP = document.createElement('p')
+    nomeP.textContent = `${nome.value}`
+    listaNome.appendChild(nomeP)
+
+    let dataP = document.createElement('p')
+    dataP.textContent = `${data.value}`
+    listaData.appendChild(dataP)
+
+    let emailP = document.createElement('p')
+    emailP.textContent = `${email.value}`
+    listaEmail.appendChild(emailP)
+
+    //adicionando na lista
+    let listaTotal = document.getElementById('colaborador-lista')
+    listaTotal.append(listaNome, listaData, listaEmail)
+}
+
+const visualizarColaboradores = (event) => {
+    let nenhumCadastro = document.getElementById('titulo-colab')
+    let listaColabs = document.getElementById('lista-colaboradores')
+
+    nenhumCadastro.classList.toggle('d-none')
+    listaColabs.classList.toggle('d-none')
 }
