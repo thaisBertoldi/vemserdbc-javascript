@@ -35,17 +35,19 @@ const validarEmail = (event) => {
 
     //3 - obrigatório possuir pelo menos um '.' (ponto) depois do '@' e não podem estar juntos, ex: email@.ig // inválido pois o ponto está junto do arroba;
     // let existePonto = caractereEmail.some(el => el === '.')
-    let pontoDepoisArroba = caractereEmail.indexOf('.') > (caractereEmail.indexOf('@') + 1)
+    let arroba = caractereEmail.lastIndexOf('@')
+    let dominioEmail = email.slice(arroba + 1)
+    let pontoDepoisArroba = dominioEmail.indexOf('.') > (dominioEmail.indexOf('@') + 1) //só que se tiver um ponto antes do @ nao dá certo, verificar
+    console.log('pontoDepoisArroba', pontoDepoisArroba)
 
     //4 - não pode terminar com '.' (ponto), ex: "email@pessoal.";
     //5 - deve ter pelo menos duas letras depois de um '.' (ponto), ex: "email@pessoal.c" // inválido pois tem somente o 'c' depois do '.';
     let ultimoCaractere = caractereEmail.lastIndexOf('.') < caractereEmail.length - 2
+    console.log('ultimoCaractere', ultimoCaractere)
 
     //6 - deve possuir o domínio 'dbccompany'
-    let arroba = caractereEmail.indexOf('@')
-    let ponto = caractereEmail.indexOf('.')
-    let dominioEmail = email.slice(arroba + 1, ponto)
-    let dominioDBC = dominioEmail === 'dbccompany'
+    let dominioDBC = dominioEmail.includes('dbccompany')
+    console.log(dominioDBC)
 
     const ehValido = validacaoCaractere && existeArroba && pontoDepoisArroba && ultimoCaractere && dominioDBC;
     mensagemErro(ehValido, 'email-erro')
@@ -88,12 +90,14 @@ const validarSenha = (event) => {
 
 
 
-const adicionarMascaraData = (input, data) => {
-    const inputData = document.getElementById('data-input').value;
-    //inputData.replaceAll('/', '');
-
-}
-
+// const adicionarMascaraData = (input, data) => {
+//     const input = document.getElementById('data-input')
+//     const inputData = document.getElementById('data-input').value;
+//     const tamanhoData = document.getElementById('data-input').maxLength;
+//     input.addEventListener(e, )
+//     console.log(inputData, tamanhoData)
+//     //inputData.replaceAll('/', '');
+// }
 
 const validarData = () => {
     /* 
@@ -123,6 +127,7 @@ const validarData = () => {
 
     const ehValido = validacaoData && seNaoDataFutura && seDezoitoAVinteESeis;
     mensagemErro(ehValido, 'data-erro')
+    // adicionarMascaraData()
     return ehValido;
 }
 
