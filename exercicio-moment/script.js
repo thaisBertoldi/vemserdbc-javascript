@@ -8,6 +8,18 @@ const mensagemErro = (variavel, id) => {
     }
 }
 
+const validaNome = (event) => {
+    //- adicionar um campo de nome acima da data de nascimento e adicionar a validação para possuir somente letras;
+    const input = event ? event.target : document.getElementById('nome-input');
+    const nome = input.value;
+
+    let nomeArray = [...nome]
+
+    let somenteLetras = nomeArray.every(el => el.toString().toLowerCase() !== el.toString().toUpperCase())
+    mensagemErro(somenteLetras, 'nome-erro')
+    return somenteLetras;
+}
+
 const validarEmail = (event) => {
     /* 
         adicionar um eventListener para o evento "onkeyup" do input email-input que terá como ação esta função de validarEmail
@@ -88,7 +100,6 @@ const validarSenha = (event) => {
 
 const adicionarMascaraData = () => {
     const inputAlgo = document.getElementById('data-input')
-    const tamanhoData = document.getElementById('data-input').maxLength;
     let inputData = document.getElementById('data-input').value;
     if (inputData.length === 2) {
         inputAlgo.value = `${inputData}/`
@@ -99,7 +110,7 @@ const adicionarMascaraData = () => {
     }
 }
 
-const validarData = () => {
+const validarData = (event) => {
     /* 
         adicionar um eventListener para o evento "onkeyup" do input data-input que terá como ação esta função de validarSenha
         deve validar as seguintes regras:
@@ -109,7 +120,8 @@ const validarData = () => {
         obs: caso o email (value) que está no input for válido/inválido deverá alterar a span com id="data-erro" para fique com um display visível ou invisível (dependendo da situação)
     */
 
-    const input = document.getElementById('data-input');
+        
+    const input = event ? event.target : document.getElementById('data-input');
     const data = moment(input.value, 'DD/MM/YYYY');
 
     // 1 - deve ser uma data válida;
@@ -132,5 +144,5 @@ const validarData = () => {
 
 const validarCadastro = (event) => {
     event.preventDefault();
-    console.log(`Cadastro: data: ${validarData()}, email: ${validarEmail()}, senha: ${validarSenha()}`)
+    console.log(`Cadastro: nome: ${validaNome()}, data: ${validarData()}, email: ${validarEmail()}, senha: ${validarSenha()}`)
 }
