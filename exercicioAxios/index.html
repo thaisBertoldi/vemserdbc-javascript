@@ -38,6 +38,12 @@
             </div>
 
             <div class="p-3 d-flex flex-column">
+                <span>Nome</span>
+                <input id="nome-input" onkeyup="validaNome()">
+                <span id="nome-erro" class="d-none text-danger">Nome inválido</span>
+            </div>
+
+            <div class="p-3 d-flex flex-column">
                 <span>Data de Nascimento*</span>
                 <input id="date-input-registration" onkeyup="validarData()" maxlength="10">
                 <span id="date-registration-error" class="d-none">Data inválida</span>
@@ -71,7 +77,7 @@
             <ul id="user-list">
             </ul>
 
-            <button type="button" onclick="irPara('home', 'login')">Sair</button>
+            <button type="button" onclick="irPara('home', 'login'), alternarClasses('div-da-lista', 'd-none')">Sair</button>
         </div>
     </div>
 
