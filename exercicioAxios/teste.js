@@ -1,5 +1,8 @@
-let string = "joao paulo correia"
+let string = `1:"joao" paulo correia`
 
-let nomeTitleCase = string.replaceAll(' ', '')
+let nomeTitleCase = string.split(' ')
+let emailDigitado = "joao"
 
-console.log(nomeTitleCase)
+let teste = nomeTitleCase.filter(el => el.includes(emailDigitado))
+
+console.log(teste)

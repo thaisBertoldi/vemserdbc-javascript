@@ -139,7 +139,6 @@ const irPara = (origem, destino) => {
     alternarClasses(elementoOrigem, 'd-none', 'd-flex');
     alternarClasses(elementoDestino, 'd-none', 'd-flex');
 }
-
 class Colaborador {
     id;
     nome;
@@ -147,8 +146,6 @@ class Colaborador {
     email;
     senha;
 }
-
-
 
 const cadastrarUsuario = () => {
     let nome = document.getElementById('nome-input').value
@@ -171,35 +168,13 @@ const cadastrarUsuario = () => {
             });
 }
 
-
-const limparInputERedirecionar = () => {
-    let nome = document.getElementById('nome-input')
-    let dataNascimento = document.getElementById('date-input-registration')
-    let email = document.getElementById('email-input-registration')
-    let senha = document.getElementById('password-input-registration')
-    try {
-        nome.value = "";
-        dataNascimento.value = "";
-        email.value = "";
-        senha.value = "";
-        irPara('registration', 'home');
-    } catch (e) {
-        console.log("erro ao tentar limpar input e redirecionar" + e)
-    }
-}
-
 const validarCadastro = () => {
     let cadastroValido = validarData() && validarEmail() && validarSenha();
     console.log(`Cadastro ${cadastroValido ? 'válido!' : 'inválido'}`);
 
     if (cadastroValido) {
         cadastrarUsuario();
-        limparInputERedirecionar();
     }
-}
-
-const excluirColaborador = () => {
-
 }
 
 const listarUsuarios = () => {
@@ -221,46 +196,28 @@ const listarUsuarios = () => {
 
 const validarEmailLogin = () => {
     let emailDigitado = document.getElementById('email-input-login').value
-    console.log(emailDigitado)
-    let emailsJson = [];
     
-    axios.get('http://localhost:3000/colaboradores')
+    axios.get(`http://localhost:3000/colaboradores?email=${emailDigitado}`)
         .then((sucesso) => {
-            //data possui o objeto inserido, no caso do post
-            sucesso.data.forEach(elemento => {
-                emailsJson.push(elemento.email);
-            })
+            console.log(sucesso)
         },
             (erro) => {
                 console.log(erro + 'Algo de errado nao está certo')
             });
-    console.log(emailsJson)
-    let emailExiste = emailsJson.map(el => el.includes(JSON.stringify(emailDigitado)))
-    console.log('emailexiste: ' + emailExiste)
-    let ehValido = emailExiste.length > 0 ? true : false;
-    console.log(ehValido)
-    return ehValido;
 }
 
 const validarSenhaLogin = () => {
     let senhaDigitada = document.getElementById('password-input-login').value
     console.log(senhaDigitada)
     let senhasJson = [];
-    
-    axios.get('http://localhost:3000/colaboradores')
+
+    axios.get(`http://localhost:3000/colaboradores?senha=${senhaDigitada}`)
         .then((sucesso) => {
-            sucesso.data.forEach(elemento => {
-                senhasJson.push(elemento.senha);
-                console.log(senhasJson)
-            })
+            console.log(sucesso)
         },
             (erro) => {
                 console.log(erro + 'Algo de errado nao está certo')
             });
-    console.log(senhasJson)
-    let senhaExiste = senhasJson.forEach(el => el.includes(senhaDigitada) ? true : false)
-    console.log('senha existe: ' + senhaExiste)
-    return senhaExiste;
 }
 
 const validarLogin = () => {
@@ -271,59 +228,3 @@ const validarLogin = () => {
         irPara('login', 'home')
     }
 }
-/*
-    - Funcionalidade de login:
-        - Busca aquele que tenha o email igual ao digitado;
-        - Verifica se a senha dele é igual a senha digitada no input senha;
-        - Se a validação estiver ok, vai para a tela 'home';
-
-
-    - Na tela home terá somente uma listagem dos colaboradores <li> pode ser só com o texto do nome de cada um;
-*/
-
-
-
-// const cadastrarUsuario = () => {
-//     const colaborador = { nome: 'João' }
-//     axios.post('http://localhost:3000/colaboradores', colaborador)
-//         .then((sucesso) => {
-//             //data possui o objeto inserido, no caso do post
-//             sucesso.data.id;
-//             const li = document.createElement('li');
-//             li.setAttribute('id', `colab-${sucesso.data.id}`)
-//             console.log('Sucesso')
-//         },
-//             (erro) => {
-//                 console.log(erro + 'Algo de errado nao está certo')
-//             });
-//     const colaboradorNomeAlterado = { nome: 'Joãozinho' }
-//     axios.put('http://localhost:3000/colaboradores/1', colaboradorNomeAlterado) //passa o id no url
-//         .then((sucesso) => {
-//             console.log('Sucesso')
-//         },
-//             (erro) => {
-//                 console.log(erro + 'Algo de errado nao está certo')
-//             });
-//     axios.delete('http://localhost:3000/colaboradores/1')
-//         .then((sucesso) => {
-//             console.log('Sucesso')
-//         },
-//             (erro) => {
-//                 console.log(erro + 'Algo de errado nao está certo')
-//             });
-// };
-
-// // get inicial
-// axios.get('http://localhost:3000/colaboradores')
-//     .then((sucesso) => {
-//         //data possui o objeto inserido, no caso do post
-//         sucesso.data.forEach(elemento => {
-//             const div = document.createElement('div');
-//             div.textContent = elemento.nome;
-//             const container = document.getElementById('container')
-//             container.appendChild(div)
-//         })
-//     },
-//         (erro) => {
-//             console.log(erro + 'Algo de errado nao está certo')
-//         });
